@@ -15,7 +15,7 @@ TagManager:
   - UI
   - 
   - SolidObjects
-  - 
+  - Background
   - 
   - 
   - 
@@ -48,6 +48,9 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 3796586321
+    locked: 0
+  - name: Water
+    uniqueID: 760122927
     locked: 0
   - name: Bridges
     uniqueID: 3188102725
