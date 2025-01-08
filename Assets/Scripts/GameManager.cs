@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] fishInventory;
+    public List<GameObject> fishInventory = new List<GameObject>();
     public Button minigameButton;
     public Canvas canvas;
-    public int Index;
+
+    public int Index = 0;
 
     private int rodLuck = 10; // set private so that the inspector doesn't change it
     private int currentClicks = 0;
@@ -44,7 +45,6 @@ public class GameManager : MonoBehaviour
     public void Reel()
     {
         int Luck = Random.Range(1, 75);
-        print(Luck);
         if(Luck <= 50)
         {
             clicksNeeded = 10;
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             SpawnButtonGame();
 
             currentFish = "salmon";
-            print("Salmon");
+            print("salmon");
         }
     }
 
@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
         if(currentClicks == clicksNeeded)
         {
             currentClicks = 0;
-            currentFish = "";
             Destroy(currentButton.gameObject);
             CatchFish(currentFish);
         }
@@ -94,17 +93,29 @@ public class GameManager : MonoBehaviour
     {
         if (name == "cod")
         {
+            print("hello cod");
+            currentFish = "";
             GameObject FishReeling = new GameObject("Cod" + (Index + 1));
             Cod codComponent = FishReeling.AddComponent<Cod>();
             codComponent.Initialize("Cod", Random.Range(1, 10), 10, 5);
+
+            fishInventory.Add(FishReeling);
         }
 
         else if(name == "salmon")
         {
+            print("hello salmon");
+            currentFish = "";
             GameObject FishReeling = new GameObject("Salmon" + (Index + 1));
             Salmon salmonComponent = FishReeling.AddComponent<Salmon>();
             salmonComponent.Initialize("Salmon", Random.Range(10, 20), 20, 10);
+
+            fishInventory.Add(FishReeling);
         }
+        Index += 1;
+
 
     }
+
+    
 }
