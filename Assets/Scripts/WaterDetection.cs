@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 
 public class WaterDetection : MonoBehaviour
 {
-    [SerializeField] private Tilemap tilemap;
+    [SerializeField] private Tilemap _tilemap;
 
     public GameManager gameScript;
 
@@ -12,9 +12,9 @@ public class WaterDetection : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) 
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int gridPosition = tilemap.WorldToCell(mousePosition); 
+            Vector3Int gridPosition = _tilemap.WorldToCell(mousePosition); 
 
-            TileBase clickedTile = tilemap.GetTile(gridPosition); 
+            TileBase clickedTile = _tilemap.GetTile(gridPosition); 
 
             if (clickedTile != null)
             {
@@ -29,10 +29,4 @@ public class WaterDetection : MonoBehaviour
 
         }
     }
-
-    private void Reel()
-    {
-        Debug.Log("Reel function called!");
-        // Add your Reel functionality here
-    }
-}
+}   
