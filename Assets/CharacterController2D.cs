@@ -10,6 +10,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] float speed = 2f; // serializefield to show this line in the inspector
     Vector2 motionVector;
     Animator animator;
+    private Vector2 lastMotionVector;
 
     void Awake()
     {
@@ -23,8 +24,20 @@ public class CharacterController2D : MonoBehaviour
         
         animator.SetFloat("horizontal", Input.GetAxisRaw("Horizontal"));
         animator.SetFloat("vertical", Input.GetAxisRaw("Vertical"));
+// Lines 27 - 40 are arya. If you find a problem regarding movement just delete those lines. I dont think there should be a problem
+        if (motionVector != Vector2.zero)
+        {
+            lastMotionVector = motionVector;
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
 
-        animator.SetBool("isMoving", motionVector != Vector2.zero);
+        // Set last movement direction for idle animation
+        animator.SetFloat("lastHorizontal", lastMotionVector.x);
+        animator.SetFloat("lastVertical", lastMotionVector.y);
     }
 
     private void FixedUpdate()
