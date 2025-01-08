@@ -19,7 +19,14 @@ public class GameManager : MonoBehaviour
     public void Cast()
     {
         print("casting");
-        print("hi arya");
+        int randomNum = 0;
+        while(randomNum != 1)
+        {
+            randomNum = Random.Range(1, 100);
+
+        }
+
+        Reel();
     }
 
     public void Reel()
@@ -33,6 +40,7 @@ public class GameManager : MonoBehaviour
 
             Clicker.transform.SetParent(canvas.transform, false);
             // if caught then call catch fish and send it the name
+            print("cod");
         }
         else if(51 <= Luck && Luck <= 75)
         {
@@ -42,6 +50,7 @@ public class GameManager : MonoBehaviour
 
             Clicker.transform.SetParent(canvas.transform, false);
             // if caught then call catch fish and send it the name
+            print("Salmon");
         }
     }
 
