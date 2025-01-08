@@ -11,23 +11,29 @@ public class GameManager : MonoBehaviour
     public Canvas canvas;
     public int Index;
 
+    public int rodLuck = 50;
+
     void Update()
     {
         
     }
 
-    public void Cast()
+    public void StartCasting()
+    {
+        StartCoroutine(CastCoroutine());
+    }
+
+    public IEnumerator CastCoroutine()
     {
         print("casting");
         int randomNum = 0;
-        while(randomNum != 1)
+        while (randomNum != 1)
         {
             print(randomNum);
-            randomNum = Random.Range(1, 1000);
-
+            randomNum = Random.Range(1, rodLuck);
+            yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds
         }
         print(randomNum);
-
 
         Reel();
     }

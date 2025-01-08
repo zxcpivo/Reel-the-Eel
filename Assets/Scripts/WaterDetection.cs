@@ -18,7 +18,7 @@ public class WaterDetection : MonoBehaviour
 
             if (clickedTile != null)
             {
-                gameScript.Cast();
+                gameScript.StartCasting();
             }
 
             else
