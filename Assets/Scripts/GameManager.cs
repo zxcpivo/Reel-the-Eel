@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public Canvas canvas;
     public int Index;
 
-    public int rodLuck = 50;
+    private int rodLuck = 50; // set private so that the inspector doesnt change it
 
     void Update()
     {
@@ -29,11 +29,9 @@ public class GameManager : MonoBehaviour
         int randomNum = 0;
         while (randomNum != 1)
         {
-            print(randomNum);
             randomNum = Random.Range(1, rodLuck);
-            yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds
+            yield return new WaitForSeconds(0.1f);
         }
-        print(randomNum);
 
         Reel();
     }
