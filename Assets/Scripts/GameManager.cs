@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public void Cast()
     {
         print("casting");
+        print("hi arya");
     }
 
     public void Reel()
