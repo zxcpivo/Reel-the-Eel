@@ -22,9 +22,12 @@ public class GameManager : MonoBehaviour
         int randomNum = 0;
         while(randomNum != 1)
         {
-            randomNum = Random.Range(1, 100);
+            print(randomNum);
+            randomNum = Random.Range(1, 1000);
 
         }
+        print(randomNum);
+
 
         Reel();
     }
