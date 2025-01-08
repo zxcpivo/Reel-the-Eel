@@ -1524,6 +1524,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &696475588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3260957952155189256, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
+  m_PrefabInstance: {fileID: 2467733455932756031}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7bbd3d0efdb09347a2cd2d221349680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &698038458
 GameObject:
   m_ObjectHideFlags: 0
@@ -5918,6 +5929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1566093559}
+  gameScript: {fileID: 696475588}
 --- !u!1 &1599854690
 GameObject:
   m_ObjectHideFlags: 0

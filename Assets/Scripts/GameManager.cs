@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void Cast()
+    {
+        print("cast");
+    }
+
     public void Reel()
     {
         int Luck = Random.Range(1, 75);

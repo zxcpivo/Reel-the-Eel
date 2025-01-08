@@ -3,7 +3,9 @@ using UnityEngine.Tilemaps;
 
 public class WaterDetection : MonoBehaviour
 {
-    [SerializeField] private Tilemap tilemap; 
+    [SerializeField] private Tilemap tilemap;
+
+    public GameManager gameScript;
 
     void Update()
     {
@@ -14,12 +16,16 @@ public class WaterDetection : MonoBehaviour
 
             TileBase clickedTile = tilemap.GetTile(gridPosition); 
 
-            if (clickedTile != null) 
-                Debug.Log("Water");
+            if (clickedTile != null)
+            {
+                gameScript.Cast();
+            }
 
             else
-
+            {
                 Debug.Log("Not water");
+            }
+
 
         }
     }

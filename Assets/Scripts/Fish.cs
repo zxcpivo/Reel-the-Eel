@@ -18,12 +18,3 @@ public class Fish : MonoBehaviour
     }
 }
 
-public class Tuna : Fish
-{
-    public string Color = "Blue";
-
-    public Tuna(string name, int weight, int clicks, float value, string color) : base(name, weight, clicks, value)
-    {
-        this.Color = color;
-    }
-}
