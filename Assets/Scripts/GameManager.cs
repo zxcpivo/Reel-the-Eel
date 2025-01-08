@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject[] fishInventory;
-    public Button click;
+    public Button minigameButton;
     public Canvas canvas;
     public int Index;
 
-    private int rodLuck = 50; // set private so that the inspector doesnt change it
+    private int rodLuck = 10; // set private so that the inspector doesn't change it
+    private int currentClicks = 0;
+    private int clicksNeeded = 0;
+
+    private string currentFish = "";
+    private Button currentButton;
 
     void Update()
     {
@@ -39,25 +44,49 @@ public class GameManager : MonoBehaviour
     public void Reel()
     {
         int Luck = Random.Range(1, 75);
+        print(Luck);
         if(Luck <= 50)
         {
-            int clicksNeeded = 10;
-            Vector3 ButtonPos = new Vector3(0, -450, 0);
-            Button Clicker = Instantiate(click, ButtonPos, Quaternion.identity);
+            clicksNeeded = 10;
 
-            Clicker.transform.SetParent(canvas.transform, false);
-            // if caught then call catch fish and send it the name
+            SpawnButtonGame();
+
+            currentFish = "cod";
             print("cod");
         }
         else if(51 <= Luck && Luck <= 75)
         {
-            int clicksNeeded = 20;
-            Vector3 ButtonPos = new Vector3(0, -450, 0);
-            Button Clicker = Instantiate(click, ButtonPos, Quaternion.identity);
+            clicksNeeded = 20;
 
-            Clicker.transform.SetParent(canvas.transform, false);
-            // if caught then call catch fish and send it the name
+            SpawnButtonGame();
+
+            currentFish = "salmon";
             print("Salmon");
+        }
+    }
+
+    public void SpawnButtonGame()
+    {
+        Vector3 ButtonPos = new Vector3(0, -450, 0);
+        Button catchFishButton = Instantiate(minigameButton, ButtonPos, Quaternion.identity);
+        currentButton = catchFishButton;
+
+        currentButton.transform.SetParent(canvas.transform, false);
+
+        currentButton.onClick.AddListener(ClickCounter);
+    }
+
+    public void ClickCounter()
+    {
+        currentClicks += 1;
+
+        print(currentClicks);
+        if(currentClicks == clicksNeeded)
+        {
+            currentClicks = 0;
+            currentFish = "";
+            Destroy(currentButton.gameObject);
+            CatchFish(currentFish);
         }
     }
 

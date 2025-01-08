@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1384084321
-  m_SortingLayer: 4
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 443419526, guid: 646b178b5dca0ca42a917b39bf3a8d8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -208,5 +208,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishInventory: []
-  click: {fileID: 6047878786222844009, guid: 40a01896140a4ec4482ab751b772bd93, type: 3}
+  minigameButton: {fileID: 6047878786222844009, guid: 40a01896140a4ec4482ab751b772bd93, type: 3}
+  canvas: {fileID: 0}
   Index: 0
