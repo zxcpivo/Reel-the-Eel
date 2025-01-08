@@ -18,13 +18,13 @@ public class GameManager : MonoBehaviour
 
     public void Cast()
     {
-        print("cast");
+        print("casting");
     }
 
     public void Reel()
     {
         int Luck = Random.Range(1, 75);
-        if (Luck <= 50)
+        if(Luck <= 50)
         {
             int clicksNeeded = 10;
             Vector3 ButtonPos = new Vector3(0, -450, 0);
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
             Clicker.transform.SetParent(canvas.transform, false);
             // if caught then call catch fish and send it the name
         }
-        else if (51 <= Luck && Luck <= 75)
+        else if(51 <= Luck && Luck <= 75)
         {
             int clicksNeeded = 20;
             Vector3 ButtonPos = new Vector3(0, -450, 0);
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
             codComponent.Initialize("Cod", Random.Range(1, 10), 10, 5);
         }
 
-        else if (name == "salmon")
+        else if(name == "salmon")
         {
             GameObject FishReeling = new GameObject("Salmon" + (Index + 1));
             Salmon salmonComponent = FishReeling.AddComponent<Salmon>();
