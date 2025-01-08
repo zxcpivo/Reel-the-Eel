@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Water
   - Ground
+  - River
+  - Pond
   layers:
   - Default
   - TransparentFX
@@ -48,6 +50,12 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 3796586321
+    locked: 0
+  - name: River
+    uniqueID: 2797248621
+    locked: 0
+  - name: Pond
+    uniqueID: 740350017
     locked: 0
   - name: Water
     uniqueID: 760122927
