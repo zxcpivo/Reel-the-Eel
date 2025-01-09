@@ -13,7 +13,7 @@ public class WaterDetection : MonoBehaviour
 
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-            if (hit.collider != null)
+            if (hit.collider != null && gameScript.isFishing == false)
             {
                 Debug.Log($"Hit Collider: {hit.collider.name}, Tag: {hit.collider.tag}");
 
@@ -26,8 +26,10 @@ public class WaterDetection : MonoBehaviour
                 else
                     Debug.Log("not water");
             }
-            else
-                Debug.Log("No collider detected.");
+            else if(hit.collider == null  && gameScript.isFishing == false)
+            {
+                print("not water");
+            }
         }
     }
 }
