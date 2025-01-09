@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - River
   - Pond
+  - shop
   layers:
   - Default
   - TransparentFX
