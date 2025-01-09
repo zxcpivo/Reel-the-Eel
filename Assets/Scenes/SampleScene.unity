@@ -2311,9 +2311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f5fa92cc16ff547bbd01d3e2f3296e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Fish
-  weight: 0
-  sprite: {fileID: 0}
 --- !u!61 &151122820
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11526,26 +11523,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 2224482825812781603, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 3260957952155189256, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: canvas
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.6393329
-      objectReference: {fileID: 0}
-    - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.6393329
-      objectReference: {fileID: 0}
-    - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.6393329
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785034209}
     - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.4219
