@@ -27,4 +27,9 @@ public class InventoryManager : MonoBehaviour
             menuActivated = true;
         }
     }
+
+    public void AddItem(string itemName, int weight, Sprite itemSprite)
+    {
+        Debug.Log("itemName = " + itemName + "Weight = " + weight + "itemSprite = " + itemSprite);
+    }
 }
