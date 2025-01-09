@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Salmon : Fish
 {
-    void Start()
+    public Salmon(string name, int weight, int clicks, float value) : base(name, weight, clicks, value)
     {
-        int weight = Random.Range(10, 20);
-        Initialize("salmon", Random.Range(10, 20), 20, 10);
+        this.Value = value * weight;
     }
 }

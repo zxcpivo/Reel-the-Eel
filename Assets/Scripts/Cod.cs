@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Cod : Fish
 {
-    void Start()
+    
+    public Cod(string name, int weight, int clicks, float value) : base(name, weight, clicks, value)
     {
-        int weight = Random.Range(1, 10);
-        Initialize("cod", weight, 10, 5);
+        this.Value = value * weight;
     }
 }
