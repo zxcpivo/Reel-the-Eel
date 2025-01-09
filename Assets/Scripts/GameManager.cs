@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     private string currentFish = "";
     private Button currentButton;
 
+    public bool isFishing = false;
+
     void Update()
     {
         
@@ -44,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void Reel()
     {
-        int Luck = Random.Range(1, 75);
+        int Luck = Random.Range(1, 100);
         if(Luck <= 50)
         {
             clicksNeeded = 10;
@@ -52,7 +54,7 @@ public class GameManager : MonoBehaviour
             SpawnButtonGame();
 
             currentFish = "cod";
-            print("cod");
+            print("reeling a cod");
         }
         else if(51 <= Luck && Luck <= 75)
         {
@@ -61,7 +63,16 @@ public class GameManager : MonoBehaviour
             SpawnButtonGame();
 
             currentFish = "salmon";
-            print("salmon");
+            print("reeling a salmon");
+        }
+        else if(76 <= Luck && Luck <= 90)
+        {
+            clicksNeeded = 30;
+
+            SpawnButtonGame();
+
+            currentFish = "toona";
+            print("reeling a toona");
         }
     }
 
@@ -85,34 +96,39 @@ public class GameManager : MonoBehaviour
         {
             currentClicks = 0;
             Destroy(currentButton.gameObject);
+            isFishing = false;
             CatchFish(currentFish);
         }
     }
 
     public void CatchFish(string name)
     {
+        GameObject FishReeling = new GameObject(currentFish + (Index + 1));
+
         if (name == "cod")
         {
-            print("hello cod");
-            currentFish = "";
-            GameObject FishReeling = new GameObject("Cod" + (Index + 1));
             Cod codComponent = FishReeling.AddComponent<Cod>();
-            codComponent.Initialize("Cod", Random.Range(1, 10), 10, 5);
+            codComponent.Initialize(currentFish, Random.Range(1, 10), 10, 5);
 
             fishInventory.Add(FishReeling);
         }
-
-        else if(name == "salmon")
+        else if (name == "salmon")
         {
-            print("hello salmon");
-            currentFish = "";
-            GameObject FishReeling = new GameObject("Salmon" + (Index + 1));
             Salmon salmonComponent = FishReeling.AddComponent<Salmon>();
-            salmonComponent.Initialize("Salmon", Random.Range(10, 20), 20, 10);
+            salmonComponent.Initialize(currentFish, Random.Range(10, 20), 20, 10);
 
             fishInventory.Add(FishReeling);
         }
+        else if (name == "toona")
+        {
+            Toona toonaComponent = FishReeling.AddComponent<Toona>();
+            toonaComponent.Initialize(currentFish, Random.Range(10, 20), 20, 10);
+
+            fishInventory.Add(FishReeling);
+        }
+        print($"caught a {currentFish}");
         Index += 1;
+        currentFish = "";
 
 
     }

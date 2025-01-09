@@ -16,12 +16,13 @@ public class WaterDetection : MonoBehaviour
 
             TileBase clickedTile = _tilemap.GetTile(gridPosition); 
 
-            if (clickedTile != null)
+            if (clickedTile != null && gameScript.isFishing == false)
             {
+                gameScript.isFishing = true;
                 gameScript.StartCasting();
             }
 
-            else
+            if(clickedTile == null && gameScript.isFishing == false)
             {
                 Debug.Log("Not water");
             }
