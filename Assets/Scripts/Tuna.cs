@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Toona : Fish
 {
-    void Start()
+    public Toona(string name, int weight, int clicks, float value) : base(name, weight, clicks, value)
     {
-        int weight = Random.Range(1, 10);
-        Initialize("toona", weight, 30, 25);
+        this.Value = value * weight;
     }
 }
