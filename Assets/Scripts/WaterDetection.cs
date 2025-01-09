@@ -1,33 +1,33 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class WaterDetection : MonoBehaviour
 {
-    [SerializeField] private Tilemap _tilemap;
-
-    public GameManager gameScript;
+    [SerializeField] GameManager gameScript;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) 
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int gridPosition = _tilemap.WorldToCell(mousePosition); 
+            mousePosition.z = 0; 
 
-            TileBase clickedTile = _tilemap.GetTile(gridPosition); 
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-            if (clickedTile != null && gameScript.isFishing == false)
+            if (hit.collider != null)
             {
-                gameScript.isFishing = true;
-                gameScript.StartCasting();
-            }
+                Debug.Log($"Hit Collider: {hit.collider.name}, Tag: {hit.collider.tag}");
 
-            if(clickedTile == null && gameScript.isFishing == false)
-            {
-                Debug.Log("Not water");
+                if (hit.collider.CompareTag("Water"))
+                {
+                    Debug.Log("water");
+                    gameScript.isFishing = true;
+                    gameScript.StartCasting();
+                }
+                else
+                    Debug.Log("not water");
             }
-
-            //f
+            else
+                Debug.Log("No collider detected.");
         }
     }
-}   
+}
