@@ -6650,7 +6650,7 @@ GameObject:
   - component: {fileID: 1504542962}
   - component: {fileID: 1504542960}
   - component: {fileID: 1504542959}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontGround
   m_TagString: shop
   m_Icon: {fileID: 0}
