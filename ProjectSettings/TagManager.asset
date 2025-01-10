@@ -67,3 +67,6 @@ TagManager:
   - name: Player
     uniqueID: 1384084321
     locked: 0
+  - name: Minigame
+    uniqueID: 3083137015
+    locked: 0
