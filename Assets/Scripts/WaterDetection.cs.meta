@@ -3,7 +3,10 @@ guid: d2c61065581e66844a15de6a2cfc889f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gameScript: {instanceID: 0}
+  - pauseMenuManager: {instanceID: 0}
+  - splashSound: {fileID: 8300000, guid: 2da910633d695064897a8736ee503160, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

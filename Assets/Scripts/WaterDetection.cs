@@ -4,7 +4,13 @@ public class WaterDetection : MonoBehaviour
 {
     [SerializeField] GameManager gameScript;
     public PauseMenuManager pauseMenuManager;
+    [SerializeField] private AudioClip splashSound;
+    private AudioSource audioSource;
 
+    void Start()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+    }
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && pauseMenuManager.isPaused == false) 
@@ -23,6 +29,8 @@ public class WaterDetection : MonoBehaviour
                     Debug.Log("water");
                     gameScript.isFishing = true;
                     gameScript.StartCasting();
+                    audioSource.PlayOneShot(splashSound);
+                    
                 }
                 else
                     Debug.Log("not water");
