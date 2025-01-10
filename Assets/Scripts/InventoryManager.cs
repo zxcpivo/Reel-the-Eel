@@ -8,20 +8,22 @@ public class InventoryManager : MonoBehaviour
     private bool menuActivated;
     public ItemSlot[] itemSlot;
 
+    // Add this variable to track the selected slot
+    private ItemSlot currentlySelectedSlot;
+
     void Start()
     {
-        
     }
 
     void Update()
     {
-        if(Input.GetButtonDown("Inventory") && menuActivated)
+        if (Input.GetButtonDown("Inventory") && menuActivated)
         {
             Time.timeScale = 1;
             InventoryMenu.SetActive(false);
             menuActivated = false;
         }
-        else if(Input.GetButtonDown("Inventory") && !menuActivated)
+        else if (Input.GetButtonDown("Inventory") && !menuActivated)
         {
             Time.timeScale = 0;
             InventoryMenu.SetActive(true);
@@ -33,11 +35,26 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if(itemSlot[i].isFull == false)
+            if (itemSlot[i].isFull == false)
             {
                 itemSlot[i].AddItem(itemName, weight, itemSprite);
                 return;
             }
         }
+    }
+
+    public void SelectSlot(ItemSlot slot)
+    {
+        // Deselect the previously selected slot
+        if (currentlySelectedSlot != null)
+        {
+            currentlySelectedSlot.selectedShader.SetActive(false);
+            currentlySelectedSlot.thisItemSelected = false;
+        }
+
+        // Select the new slot
+        currentlySelectedSlot = slot;
+        currentlySelectedSlot.selectedShader.SetActive(true);
+        currentlySelectedSlot.thisItemSelected = true;
     }
 }

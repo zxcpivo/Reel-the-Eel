@@ -4,8 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEditor.Rendering;
+using UnityEngine.EventSystems;
 
-public class ItemSlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     public string itemName;
     public int weight;
@@ -16,6 +17,15 @@ public class ItemSlot : MonoBehaviour
     private TMP_Text weightText;
     private Image itemImage;
 
+    public GameObject selectedShader;
+    public bool thisItemSelected;
+
+    private InventoryManager inventoryManager;
+
+    private void Start()
+    {
+        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+    }
 
 public void AddItem(string itemName, int weight, Sprite itemSprite)
     {
@@ -28,14 +38,25 @@ public void AddItem(string itemName, int weight, Sprite itemSprite)
         weightText.enabled = true;
         itemImage.sprite = itemSprite;
     }
-    // Start is called before the first frame update
-    void Start()
+    
+    public void OnPointerClick(PointerEventData eventData)
     {
-        
+        if(eventData.button== PointerEventData.InputButton.Left)
+        {
+            OnLeftClick();
+        }
+        if(eventData.button== PointerEventData.InputButton.Right)
+        {
+            OnRightClick();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnLeftClick()
+    {
+        inventoryManager.SelectSlot(this);
+    }
+
+    public void OnRightClick()
     {
         
     }

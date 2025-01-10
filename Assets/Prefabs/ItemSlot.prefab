@@ -380,3 +380,5 @@ MonoBehaviour:
   itemSprite: {fileID: 0}
   isFull: 0
   weightText: {fileID: 7995211300284546866}
+  selectedShader: {fileID: 144310135788274442}
+  thisItemSelected: 0
