@@ -9,6 +9,7 @@ TagManager:
   - River
   - Pond
   - shop
+  - Fish
   layers:
   - Default
   - TransparentFX
