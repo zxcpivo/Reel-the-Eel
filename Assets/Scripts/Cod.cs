@@ -7,6 +7,6 @@ public class Cod : Fish
     
     public Cod(string name, int weight, int clicks, float value) : base(name, weight, clicks, value)
     {
-        this.Value = value * weight;
+        //this.Value = value * weight;
     }
 }

@@ -10090,30 +10090,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 2224482825812781603, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 3260957952155189256, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1785034209}
-    - target: {fileID: 3260957952155189256, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: minigameButton
-      value: 
-      objectReference: {fileID: 6047878786222844009, guid: 40a01896140a4ec4482ab751b772bd93, type: 3}
-    - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.6393329
-      objectReference: {fileID: 0}
-    - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.6393329
-      objectReference: {fileID: 0}
-    - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.6393329
-      objectReference: {fileID: 0}
     - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.4219
