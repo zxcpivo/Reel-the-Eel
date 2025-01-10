@@ -2927,7 +2927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScript: {fileID: 696475588}
-  pauseMenuManager: {fileID: 0}
+  pauseMenuManager: {fileID: 753525272}
   splashSound: {fileID: 8300000, guid: 2da910633d695064897a8736ee503160, type: 3}
 --- !u!61 &730460579
 BoxCollider2D:

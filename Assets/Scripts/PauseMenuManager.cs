@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PauseMenuManager : MonoBehaviour
 {
     public  GameObject PauseMenuCanvas;
-    public bool isPaused;
+    public bool isPaused = false;
 
     void Start()
     {
