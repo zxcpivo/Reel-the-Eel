@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
 
     public bool isFishing = false;
 
+    void Start()
+    {
+        fishingGame.SetActive(false);
+    }
     void Update()
     {
         

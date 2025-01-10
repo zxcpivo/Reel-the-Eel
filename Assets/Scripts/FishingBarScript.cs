@@ -21,10 +21,6 @@ public class FishingBarScript : MonoBehaviour
     public bool onFish;
     public GameManager gameScript;
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -40,7 +36,7 @@ public class FishingBarScript : MonoBehaviour
 
         if(targetTime <= 0.0f) // losing game
         {
-            transform.localPosition = new Vector3(-0.48f, -2.3f, 0);
+            transform.localPosition = new Vector3(-0.48f, -2.27f, 0);
             onFish = false;
             targetTime = 4.0f;
             gameScript.FishingMinigameLost();
@@ -48,7 +44,7 @@ public class FishingBarScript : MonoBehaviour
 
         if (targetTime >= 8.0f) // winning game
         {
-            transform.localPosition = new Vector3(-0.48f, -2.3f, 0);
+            transform.localPosition = new Vector3(-0.48f, -2.27f, 0);
             onFish = false;
             targetTime = 4.0f;
             gameScript.FishingMinigameWon();
