@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
         if (name == "cod")
         {
             newFish = new Fish($"Cod{Index}", Random.Range(1, 10), 10, 5);
+
         }
         else if (name == "salmon")
         {
