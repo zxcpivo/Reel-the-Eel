@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public int Index = 0;
 
-    private int rodLuck = 5; // set private so that the inspector doesn't change it
+    private int rodLuck = 10; // set private so that the inspector doesn't change it
     private int currentClicks = 0;
     private int clicksNeeded = 0;
 
@@ -120,15 +120,6 @@ public class GameManager : MonoBehaviour
 
         fishInventory.Add(newFish);
         Index += 1;
-        PrintFish();
-    }
-
-    public void PrintFish()
-    {
-        foreach(Fish fish in fishInventory)
-        {
-            print($"{fish.Name}, {fish.Weight}, {fish.Value}, {fish.Clicks}");
-        }
     }
 
 
