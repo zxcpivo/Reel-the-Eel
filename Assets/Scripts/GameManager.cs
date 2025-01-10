@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void StopCasting()
+    {
+
+    }
+
     public void StartCasting()
     {
         StartCoroutine(CastCoroutine());
