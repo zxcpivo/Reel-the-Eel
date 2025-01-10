@@ -70,6 +70,6 @@ public void AddItem(string itemName, int weight, Sprite itemSprite, string itemD
 
     public void OnRightClick()
     {
-        
+        Debug.Log("Blah");
     }
-}
+} 

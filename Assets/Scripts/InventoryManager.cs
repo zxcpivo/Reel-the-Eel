@@ -10,9 +10,10 @@ public class InventoryManager : MonoBehaviour
 
     // Add this variable to track the selected slot
     private ItemSlot currentlySelectedSlot;
-
+    private CharacterController2D Controller;
     void Start()
     {
+        Controller = FindObjectOfType<CharacterController2D>();
     }
 
     void Update()
@@ -21,12 +22,14 @@ public class InventoryManager : MonoBehaviour
         {
             Time.timeScale = 1;
             InventoryMenu.SetActive(false);
+            Controller.CloseInventory();
             menuActivated = false;
         }
         else if (Input.GetButtonDown("Inventory") && !menuActivated)
         {
             Time.timeScale = 0;
             InventoryMenu.SetActive(true);
+            Controller.OpenInventory();
             menuActivated = true;
         }
     }

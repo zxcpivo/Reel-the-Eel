@@ -12,15 +12,23 @@ public class CharacterController2D : MonoBehaviour
     private Vector2 lastMotionVector;
 
     public AudioManager audioManager; 
+    private GameManager gameManager;
 
     void Awake()
     {
         _rigidBody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
     {
+        if (gameManager != null && gameManager.isFishing)
+        {
+            motionVector = Vector2.zero;
+            animator.SetBool("isMoving", false);
+            return;
+        }
         motionVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         animator.SetFloat("horizontal", Input.GetAxisRaw("Horizontal"));
@@ -60,5 +68,13 @@ public class CharacterController2D : MonoBehaviour
     private void Move()
     {
         _rigidBody2d.velocity = motionVector * speed;
+    }
+    public void OpenInventory()
+    {
+        animator.enabled = false;
+    }
+    public void CloseInventory()
+    {
+        animator.enabled = true;
     }
 }
