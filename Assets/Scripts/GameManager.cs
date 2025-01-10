@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     public GameObject fishingGame;
 
     public bool isFishing = false;
+    public InventoryManager inventoryManager;
+    public Sprite codSprite;
+    public Sprite salmonSprite;
+    public Sprite toonaSprite;
 
     void Start()
     {
@@ -95,24 +99,34 @@ public class GameManager : MonoBehaviour
     public void CatchFish(string name)
     {
         Fish newFish = null;
+        Sprite fishSprite = null;
         if (name == "cod")
         {
             int weight = Random.Range(1, 10);
             newFish = new Fish($"Cod{Index}", weight, 10, weight * 1f);
+            fishSprite = codSprite;
         }
         else if (name == "salmon")
         {
             int weight = Random.Range(10, 20);
             newFish = new Fish($"Salmon{Index}", weight, 20, weight * 1.5f);
+            fishSprite = salmonSprite;
         }
         else if (name == "toona")
         {
             int weight = Random.Range(10, 20);
             newFish = new Fish($"Toona{Index}", weight, 20, weight * 2f);
+            fishSprite = toonaSprite;
         }
         print($"Added a {newFish.Name} that weighs {newFish.Weight}");
         fishInventory.Add(newFish);
         Index += 1;
+        if (inventoryManager == null)
+        {
+            Debug.LogError("InventoryManager is not assigned in the GameManager!");
+            return;
+        }
+        inventoryManager.AddFishToInventory(newFish, fishSprite);
     }
 
 

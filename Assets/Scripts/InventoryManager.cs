@@ -11,6 +11,7 @@ public class InventoryManager : MonoBehaviour
     // Add this variable to track the selected slot
     private ItemSlot currentlySelectedSlot;
     private CharacterController2D Controller;
+    public GameManager gameManager;
     void Start()
     {
         Controller = FindObjectOfType<CharacterController2D>();
@@ -38,14 +39,19 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (itemSlot[i].isFull == false)
+            if (!itemSlot[i].isFull)
             {
                 itemSlot[i].AddItem(itemName, weight, itemSprite, itemDescription);
+                itemSlot[i].isFull = true;
                 return;
             }
         }
+        Debug.LogWarning("Inventory is Full");
     }
-
+    public void AddFishToInventory(Fish fish, Sprite fishSprite)
+    {
+        AddItem(fish.Name, fish.Weight, fishSprite, "Caught Sprite");
+    }
     public void SelectSlot(ItemSlot slot)
     {
         // Deselect the previously selected slot

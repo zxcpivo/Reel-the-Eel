@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.Rendering;
 using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
@@ -16,24 +15,27 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public Sprite emptySprite;
 
     [SerializeField]
-    private TMP_Text weightText;
-    private Image itemImage;
+    private TMP_Text weightText; // For displaying the item's weight
+    private Image itemImage; // For showing the item's sprite in the slot
 
-    public Image itemDescriptionImage;
-    public TMP_Text ItemDescriptionNameText;
-    public TMP_Text ItemDescriptionText;
-
-    public GameObject selectedShader;
-    public bool thisItemSelected;
+    public GameObject selectedShader; // Visual highlight for selected slot
+    public bool thisItemSelected; // Tracks if this slot is selected
 
     private InventoryManager inventoryManager;
 
     private void Start()
     {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+        itemImage = GetComponent<Image>(); // Automatically find the image component
+
+        // Ensure the selected shader is disabled initially
+        if (selectedShader != null)
+        {
+            selectedShader.SetActive(false);
+        }
     }
 
-public void AddItem(string itemName, int weight, Sprite itemSprite, string itemDescription)
+    public void AddItem(string itemName, int weight, Sprite itemSprite, string itemDescription)
     {
         this.itemName = itemName;
         this.weight = weight;
@@ -41,35 +43,73 @@ public void AddItem(string itemName, int weight, Sprite itemSprite, string itemD
         this.itemDescription = itemDescription;
         isFull = true;
 
-        weightText.text = weight.ToString();
-        weightText.enabled = true;
-        itemImage.sprite = itemSprite;
+        // Update UI elements for this slot
+        if (weightText != null)
+        {
+            weightText.text = weight.ToString();
+            weightText.enabled = true;
+        }
+
+        if (itemImage != null)
+        {
+            itemImage.sprite = itemSprite;
+            itemImage.enabled = true;
+        }
     }
-    
+
+    public void ClearSlot()
+    {
+        itemName = string.Empty;
+        weight = 0;
+        itemSprite = null;
+        itemDescription = string.Empty;
+        isFull = false;
+
+        // Reset UI elements for this slot
+        if (weightText != null)
+        {
+            weightText.text = string.Empty;
+            weightText.enabled = false;
+        }
+
+        if (itemImage != null)
+        {
+            itemImage.sprite = emptySprite;
+            itemImage.enabled = false;
+        }
+
+        // Disable the selected shader
+        if (selectedShader != null)
+        {
+            selectedShader.SetActive(false);
+        }
+
+        thisItemSelected = false;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button== PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
             OnLeftClick();
         }
-        if(eventData.button== PointerEventData.InputButton.Right)
+        else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            OnRightClick();
+            Debug.Log($"Right-clicked on slot with item: {itemName}");
         }
     }
 
     public void OnLeftClick()
     {
+        // Notify the InventoryManager of this slot selection
         inventoryManager.SelectSlot(this);
-        ItemDescriptionNameText.text = itemName;
-        ItemDescriptionText.text = itemDescription;
-        itemDescriptionImage.sprite = itemSprite;
-        if(itemDescriptionImage.sprite == null)
-            itemDescriptionImage.sprite = emptySprite;
-    }
 
-    public void OnRightClick()
-    {
-        Debug.Log("Blah");
+        // Enable the selected shader
+        if (selectedShader != null)
+        {
+            selectedShader.SetActive(true);
+        }
+
+        thisItemSelected = true;
     }
-} 
+}
