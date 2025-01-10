@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     private string currentFish = "";
     private Button currentButton;
 
+    public GameObject fishingGame;
+
     public bool isFishing = false;
 
     void Update()
