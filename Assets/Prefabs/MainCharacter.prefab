@@ -525,6 +525,7 @@ MonoBehaviour:
   minigameButton: {fileID: 6047878786222844009, guid: 40a01896140a4ec4482ab751b772bd93, type: 3}
   canvas: {fileID: 0}
   Index: 0
+  fishingGame: {fileID: 203663292031108728}
   isFishing: 0
 --- !u!1 &2563291894123268265
 GameObject:
@@ -1114,7 +1115,7 @@ MonoBehaviour:
   p7: {fileID: 6765825762163656327}
   p8: {fileID: 7984365517646360230}
   onFish: 0
-  playerScript: {fileID: 914480560063769678}
+  gameScript: {fileID: 3260957952155189256}
 --- !u!1 &5839159330476595225
 GameObject:
   m_ObjectHideFlags: 0

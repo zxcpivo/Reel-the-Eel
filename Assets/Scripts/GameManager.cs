@@ -12,12 +12,9 @@ public class GameManager : MonoBehaviour
 
     public int Index = 0;
 
-    private int rodLuck = 10; // set private so that the inspector doesn't change it
-    private int currentClicks = 0;
-    private int clicksNeeded = 0;
+    private int rodLuck = 5; // set private so that the inspector doesn't change it
 
     private string currentFish = "";
-    private Button currentButton;
 
     public GameObject fishingGame;
 
@@ -56,56 +53,40 @@ public class GameManager : MonoBehaviour
         int Luck = Random.Range(1, 100);
         if(Luck <= 50)
         {
-            clicksNeeded = 10;
-
-            SpawnButtonGame();
-
             currentFish = "cod";
+            fishingGame.SetActive(true);
+
             print("reeling a cod");
         }
         else if(51 <= Luck && Luck <= 75)
         {
-            clicksNeeded = 20;
-
-            SpawnButtonGame();
-
             currentFish = "salmon";
+            fishingGame.SetActive(true);
+
             print("reeling a salmon");
         }
         else if(76 <= Luck && Luck <= 90)
         {
-            clicksNeeded = 30;
-
-            SpawnButtonGame();
-
             currentFish = "toona";
+            fishingGame.SetActive(true);
+
             print("reeling a toona");
         }
     }
 
-    public void SpawnButtonGame()
+    public void FishingMinigameWon()
     {
-        Vector3 ButtonPos = new Vector3(0, -450, 0);
-        Button catchFishButton = Instantiate(minigameButton, ButtonPos, Quaternion.identity);
-        currentButton = catchFishButton;
-
-        currentButton.transform.SetParent(canvas.transform, false);
-
-        currentButton.onClick.AddListener(ClickCounter);
+        print("Won minigame");
+        fishingGame.SetActive(false);
+        isFishing = false;
+        CatchFish(currentFish);
     }
 
-    public void ClickCounter()
+    public void FishingMinigameLost()
     {
-        currentClicks += 1;
-
-        print(currentClicks);
-        if(currentClicks == clicksNeeded)
-        {
-            currentClicks = 0;
-            Destroy(currentButton.gameObject);
-            isFishing = false;
-            CatchFish(currentFish);
-        }
+        print("Lost minigame");
+        fishingGame.SetActive(false);
+        isFishing = false;
     }
 
     public void CatchFish(string name)
@@ -126,7 +107,7 @@ public class GameManager : MonoBehaviour
             int weight = Random.Range(10, 20);
             newFish = new Fish($"Toona{Index}", weight, 20, weight * 2f);
         }
-
+        print($"Added a {newFish.Name} that weighs {newFish.Weight}");
         fishInventory.Add(newFish);
         Index += 1;
     }

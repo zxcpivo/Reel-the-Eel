@@ -19,7 +19,7 @@ public class FishingBarScript : MonoBehaviour
     public GameObject p8;
 
     public bool onFish;
-    public CharacterController2D playerScript;
+    public GameManager gameScript;
 
     void Start()
     {
@@ -28,6 +28,7 @@ public class FishingBarScript : MonoBehaviour
 
     void Update()
     {
+        print(targetTime);
         if(onFish == true)
         {
             targetTime += Time.deltaTime;
@@ -37,19 +38,20 @@ public class FishingBarScript : MonoBehaviour
             targetTime -= Time.deltaTime;
         }
 
-        if(targetTime <= 0.0f)
+        if(targetTime <= 0.0f) // losing game
         {
             transform.localPosition = new Vector3(-0.48f, -2.3f, 0);
             onFish = false;
             targetTime = 4.0f;
+            gameScript.FishingMinigameLost();
         }
 
-        if (targetTime >= 8.0f)
+        if (targetTime >= 8.0f) // winning game
         {
             transform.localPosition = new Vector3(-0.48f, -2.3f, 0);
             onFish = false;
-
             targetTime = 4.0f;
+            gameScript.FishingMinigameWon();
         }
 
         if(targetTime >= 0.0f)
