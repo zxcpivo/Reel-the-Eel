@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         int randomNum = 0;
         while (randomNum != 1)
         {
+            print(randomNum);
             randomNum = Random.Range(1, rodLuck);
             yield return new WaitForSeconds(0.1f);
         }
@@ -80,7 +81,6 @@ public class GameManager : MonoBehaviour
 
     public void FishingMinigameWon()
     {
-        print("Won minigame");
         fishingGame.SetActive(false);
         isFishing = false;
         CatchFish(currentFish);
@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviour
 
     public void FishingMinigameLost()
     {
-        print("Lost minigame");
         fishingGame.SetActive(false);
         isFishing = false;
     }

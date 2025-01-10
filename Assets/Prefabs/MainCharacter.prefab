@@ -1807,4 +1807,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fish: {fileID: 8854824546873381649}
   miniGame: {fileID: 203663292031108728}
+  top: {fileID: 1880480900106863360}
+  bottom: {fileID: 8677186627408715595}
   fishMovementInterval: 2
