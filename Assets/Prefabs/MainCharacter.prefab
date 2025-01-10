@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7bbd3d0efdb09347a2cd2d221349680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishInventory: []
   minigameButton: {fileID: 6047878786222844009, guid: 40a01896140a4ec4482ab751b772bd93, type: 3}
   canvas: {fileID: 0}
   Index: 0

@@ -6,6 +6,6 @@ public class Salmon : Fish
 {
     public Salmon(string name, int weight, int clicks, float value) : base(name, weight, clicks, value)
     {
-        this.Value = value * weight;
+        //this.Value = value * weight;
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public List<GameObject> fishInventory = new List<GameObject>();
+    public List<Fish> fishInventory = new List<Fish>();
     public Button minigameButton;
     public Canvas canvas;
 
@@ -103,35 +103,24 @@ public class GameManager : MonoBehaviour
 
     public void CatchFish(string name)
     {
-        GameObject FishReeling = new GameObject(currentFish + (Index + 1));
-
+        Fish newFish = null;
         if (name == "cod")
         {
-            Cod codComponent = FishReeling.AddComponent<Cod>();
-            codComponent.Initialize(currentFish, Random.Range(1, 10), 10, 5);
+            newFish = new Fish($"Cod{Index}", Random.Range(1, 10), 10, 5);
 
-            fishInventory.Add(FishReeling);
         }
         else if (name == "salmon")
         {
-            Salmon salmonComponent = FishReeling.AddComponent<Salmon>();
-            salmonComponent.Initialize(currentFish, Random.Range(10, 20), 20, 10);
-
-            fishInventory.Add(FishReeling);
+            newFish = new Fish($"Salmon{Index}", Random.Range(10, 20), 20, 10);
         }
         else if (name == "toona")
         {
-            Toona toonaComponent = FishReeling.AddComponent<Toona>();
-            toonaComponent.Initialize(currentFish, Random.Range(10, 20), 20, 10);
-
-            fishInventory.Add(FishReeling);
+            newFish = new Fish($"Toona{Index}", Random.Range(10, 20), 20, 10);
         }
-        print($"caught a {currentFish}");
+
+        fishInventory.Add(newFish);
         Index += 1;
-        currentFish = "";
-
-
     }
 
-    
+
 }
