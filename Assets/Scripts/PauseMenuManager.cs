@@ -6,13 +6,12 @@ using UnityEngine.UI;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    public  GameObject pauseMenu;
-    public Button resume;
+    public  GameObject PauseMenuCanvas;
     public bool isPaused;
 
     void Start()
     {
-        pauseMenu.SetActive(false);
+       
     }
 
     void Update()
@@ -28,20 +27,16 @@ public class PauseMenuManager : MonoBehaviour
 
     public void Pause()
     {
-        pauseMenu.SetActive(true);
+        PauseMenuCanvas.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
     }
 
     public void Resume()
     {
-        pauseMenu.SetActive(false);
+        PauseMenuCanvas.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
 
-    public void Setting()
-    {
-
-    }
 }
