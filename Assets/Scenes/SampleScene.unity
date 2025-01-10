@@ -848,12 +848,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 528248b (organized lots of stuff in the scene and deleted random game objects that had no use)
 --- !u!1 &151122817
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,12 +941,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
-<<<<<<< HEAD
->>>>>>> 5261ccd5c8ad85c701260b6cc87e520fbd137bbc
-=======
->>>>>>> parent of 74d74a0 (Organized some game objects on the scene)
-=======
->>>>>>> parent of 528248b (organized lots of stuff in the scene and deleted random game objects that had no use)
 --- !u!1001 &153592378
 PrefabInstance:
   m_ObjectHideFlags: 0
