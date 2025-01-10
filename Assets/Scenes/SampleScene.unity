@@ -806,7 +806,6 @@ Tilemap:
     e33: 1
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 --- !u!1 &151122817
 GameObject:
@@ -902,8 +901,6 @@ BoxCollider2D:
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 >>>>>>> 5261ccd5c8ad85c701260b6cc87e520fbd137bbc
-=======
->>>>>>> parent of 74d74a0 (Organized some game objects on the scene)
 =======
 >>>>>>> parent of 74d74a0 (Organized some game objects on the scene)
 --- !u!1001 &153592378
