@@ -16,6 +16,5 @@ public class Fish
         this.Clicks = clicks;
         this.Value = value;
     }
-
 }
 

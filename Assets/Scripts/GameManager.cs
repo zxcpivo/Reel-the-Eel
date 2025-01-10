@@ -106,16 +106,18 @@ public class GameManager : MonoBehaviour
         Fish newFish = null;
         if (name == "cod")
         {
-            newFish = new Fish($"Cod{Index}", Random.Range(1, 10), 10, 5);
-
+            int weight = Random.Range(1, 10);
+            newFish = new Fish($"Cod{Index}", weight, 10, weight * 1f);
         }
         else if (name == "salmon")
         {
-            newFish = new Fish($"Salmon{Index}", Random.Range(10, 20), 20, 10);
+            int weight = Random.Range(10, 20);
+            newFish = new Fish($"Salmon{Index}", weight, 20, weight * 1.5f);
         }
         else if (name == "toona")
         {
-            newFish = new Fish($"Toona{Index}", Random.Range(10, 20), 20, 10);
+            int weight = Random.Range(10, 20);
+            newFish = new Fish($"Toona{Index}", weight, 20, weight * 2f);
         }
 
         fishInventory.Add(newFish);
