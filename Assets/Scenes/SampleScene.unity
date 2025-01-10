@@ -2744,6 +2744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScript: {fileID: 696475588}
+  pauseMenuManager: {fileID: 1443423832}
 --- !u!61 &730460579
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4189,6 +4190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1955908609}
+  resume: {fileID: 0}
   isPaused: 0
 --- !u!1 &1449391733
 GameObject:
@@ -9078,7 +9080,7 @@ GameObject:
   - component: {fileID: 1855932466}
   - component: {fileID: 1855932465}
   m_Layer: 5
-  m_Name: ContinueButton
+  m_Name: ResumeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9146,7 +9148,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1855932466}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1443423832}
+        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
+        m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1855932466
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,10 +3,11 @@ using UnityEngine;
 public class WaterDetection : MonoBehaviour
 {
     [SerializeField] GameManager gameScript;
+    public PauseMenuManager pauseMenuManager;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) 
+        if (Input.GetMouseButtonDown(0) && pauseMenuManager.isPaused == false) 
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0; 
