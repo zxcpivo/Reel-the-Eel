@@ -39,13 +39,13 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(string itemName, int weight, Sprite itemSprite, string itemDescription)
+    public void AddItem(string itemName, int weight, int quantity, Sprite itemSprite, string itemDescription)
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
             if (!itemSlot[i].isFull)
             {
-                itemSlot[i].AddItem(itemName, weight, itemSprite, itemDescription);
+                itemSlot[i].AddItem(itemName, weight, quantity, itemSprite, itemDescription);
                 itemSlot[i].isFull = true;
                 return;
             }
@@ -54,7 +54,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void AddFishToInventory(Fish fish, Sprite fishSprite)
     {
-        AddItem(fish.Name, fish.Weight, fishSprite, "Caught Sprite");
+        AddItem(fish.Name, fish.Weight, fish.Quantity, fishSprite, "Caught Sprite");
     }
     public void SelectSlot(ItemSlot slot)
     {

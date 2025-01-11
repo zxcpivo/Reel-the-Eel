@@ -11,6 +11,9 @@ public class Item : MonoBehaviour
     private int weight;
 
     [SerializeField]
+    private int quantity;
+
+    [SerializeField]
     private Sprite sprite;
 
     [TextArea]
@@ -27,7 +30,7 @@ public class Item : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            inventoryManager.AddItem(itemName, weight, sprite, itemDescription);
+            inventoryManager.AddItem(itemName, weight, quantity, sprite, itemDescription);
             Destroy(gameObject);
         }
     }

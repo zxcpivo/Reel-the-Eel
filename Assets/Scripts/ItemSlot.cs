@@ -9,6 +9,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     public string itemName;
     public int weight;
+    public int quantity;
     public Sprite itemSprite;
     public bool isFull;
     public string itemDescription;
@@ -16,6 +17,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     [SerializeField]
     private TMP_Text weightText; // For displaying the item's weight
+    private TMP_Text quantityText; // For displaying the item's quantity
     private Image itemImage; // For showing the item's sprite in the slot
 
     public GameObject selectedShader; // Visual highlight for selected slot
@@ -35,10 +37,11 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void AddItem(string itemName, int weight, Sprite itemSprite, string itemDescription)
+    public void AddItem(string itemName, int weight, int quantity, Sprite itemSprite, string itemDescription)
     {
         this.itemName = itemName;
         this.weight = weight;
+        this.quantity = quantity;
         this.itemSprite = itemSprite;
         this.itemDescription = itemDescription;
         isFull = true;
@@ -48,6 +51,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         {
             weightText.text = weight.ToString();
             weightText.enabled = true;
+        }
+
+        if (quantityText != null)
+        {
+            quantityText.text = quantity.ToString();
+            quantityText.enabled = true;
         }
 
         if (itemImage != null)
@@ -61,6 +70,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         itemName = string.Empty;
         weight = 0;
+        quantity = 0;
         itemSprite = null;
         itemDescription = string.Empty;
         isFull = false;
@@ -70,6 +80,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         {
             weightText.text = string.Empty;
             weightText.enabled = false;
+        }
+
+        if (quantityText != null)
+        {
+            quantityText.text = string.Empty;
+            quantityText.enabled = false;
         }
 
         if (itemImage != null)

@@ -103,19 +103,19 @@ public class GameManager : MonoBehaviour
         if (name == "cod")
         {
             int weight = Random.Range(1, 10);
-            newFish = new Fish($"Cod{Index}", weight, 10, weight * 1f);
+            newFish = new Fish($"Cod{Index}", weight, 1, 10, weight * 1f);
             fishSprite = codSprite;
         }
         else if (name == "salmon")
         {
             int weight = Random.Range(10, 20);
-            newFish = new Fish($"Salmon{Index}", weight, 20, weight * 1.5f);
+            newFish = new Fish($"Salmon{Index}", weight, 1, 20, weight * 1.5f);
             fishSprite = salmonSprite;
         }
         else if (name == "toona")
         {
             int weight = Random.Range(10, 20);
-            newFish = new Fish($"Toona{Index}", weight, 20, weight * 2f);
+            newFish = new Fish($"Toona{Index}", weight, 1, 20, weight * 2f);
             fishSprite = toonaSprite;
         }
         print($"Added a {newFish.Name} that weighs {newFish.Weight}");
