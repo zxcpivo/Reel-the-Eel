@@ -14,6 +14,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public bool isFull;
     public string itemDescription;
     public Sprite emptySprite;
+    
+    [SerializeField]
+    private int maxNumberOfItems;
 
     [SerializeField]
     private TMP_Text weightText; // For displaying the item's weight
@@ -37,14 +40,30 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void AddItem(string itemName, int weight, int quantity, Sprite itemSprite, string itemDescription)
+    public int AddItem(string itemName, int weight, int quantity, Sprite itemSprite, string itemDescription)
     {
+        if (isFull)
+            return quantity;
+
         this.itemName = itemName;
         this.weight = weight;
-        this.quantity = quantity;
         this.itemSprite = itemSprite;
         this.itemDescription = itemDescription;
-        isFull = true;
+        this.quantity += quantity;
+        if (this.quantity >= maxNumberOfItems)
+        {
+            quantityText.text = maxNumberOfItems.ToString();
+            quantityText.enabled = true;
+            isFull = true;
+        
+            int extraItems = this.quantity - maxNumberOfItems;
+            this.quantity = maxNumberOfItems;
+            return extraItems;
+        }
+
+        quantityText.text = this.quantity.ToString();
+        quantityText.enabled = true;
+
 
         // Update UI elements for this slot
         if (weightText != null)
@@ -64,6 +83,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             itemImage.sprite = itemSprite;
             itemImage.enabled = true;
         }
+
+        return 0;
     }
 
     public void ClearSlot()

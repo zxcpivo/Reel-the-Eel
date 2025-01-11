@@ -39,18 +39,20 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(string itemName, int weight, int quantity, Sprite itemSprite, string itemDescription)
+    public int AddItem(string itemName, int weight, int quantity, Sprite itemSprite, string itemDescription)
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (!itemSlot[i].isFull)
+            if (!itemSlot[i].isFull == false && itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0)
             {
-                itemSlot[i].AddItem(itemName, weight, quantity, itemSprite, itemDescription);
-                itemSlot[i].isFull = true;
-                return;
+                int leftOverItems = itemSlot[i].AddItem(itemName, weight, quantity, itemSprite, itemDescription);
+                if (leftOverItems > 0)
+                    leftOverItems = AddItem(itemName, weight, leftOverItems, itemSprite, itemDescription);
+
+                return leftOverItems;
             }
         }
-        Debug.LogWarning("Inventory is Full");
+        return quantity;
     }
     public void AddFishToInventory(Fish fish, Sprite fishSprite)
     {
