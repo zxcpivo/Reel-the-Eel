@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     public void PlayButton()
     {
@@ -17,5 +17,20 @@ public class NewBehaviourScript : MonoBehaviour
     public void NewSaveButton()
     {
         print("Not working yet");
+    }
+
+    public void BackButton()
+    {
+        SceneManager.LoadSceneAsync(0);
+    }
+
+    public void ControlButton()
+    {
+        SceneManager.LoadSceneAsync(3);
+    }
+
+    public void ControlBackButton()
+    {
+        SceneManager.LoadSceneAsync(2);
     }
 }
