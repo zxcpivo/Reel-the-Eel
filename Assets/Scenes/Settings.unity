@@ -958,7 +958,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &1387074691
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -979,7 +979,7 @@ GameObject:
   - component: {fileID: 1469954569}
   - component: {fileID: 1469954568}
   - component: {fileID: 1469954567}
-  - component: {fileID: 1469954566}
+  - component: {fileID: 1469954570}
   m_Layer: 5
   m_Name: SoundOn
   m_TagString: Untagged
@@ -1006,18 +1006,6 @@ RectTransform:
   m_AnchoredPosition: {x: 35, y: 295}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1469954566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469954564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbbc277786f5dfb47b576380007306bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1469954567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,9 +1050,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1469954566}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: BackButton
+      - m_Target: {fileID: 1469954570}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: TurnSoundOn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1112,6 +1100,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469954564}
   m_CullTransparentMesh: 1
+--- !u!114 &1469954570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469954564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca53ea4db67d65740a8c7ff41ad0add4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundOn: 0
+  MusicOn: 0
+  footSteps: []
+  stepInterval: 0.5
 --- !u!1 &1671149734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,7 +1265,7 @@ GameObject:
   - component: {fileID: 1740525396}
   - component: {fileID: 1740525395}
   - component: {fileID: 1740525394}
-  - component: {fileID: 1740525393}
+  - component: {fileID: 1740525397}
   m_Layer: 5
   m_Name: SoundOff
   m_TagString: Untagged
@@ -1288,18 +1292,6 @@ RectTransform:
   m_AnchoredPosition: {x: -268, y: 295}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1740525393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1740525391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbbc277786f5dfb47b576380007306bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1740525394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1344,9 +1336,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1740525393}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: BackButton
+      - m_Target: {fileID: 1740525397}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: TurnSoundOff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1394,6 +1386,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740525391}
   m_CullTransparentMesh: 1
+--- !u!114 &1740525397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740525391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca53ea4db67d65740a8c7ff41ad0add4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundOn: 0
+  MusicOn: 0
+  footSteps: []
+  stepInterval: 0.5
 --- !u!1 &1955615638
 GameObject:
   m_ObjectHideFlags: 0

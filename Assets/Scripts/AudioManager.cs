@@ -1,16 +1,30 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioClip[] footSteps; 
-    private AudioSource source;   
-    private bool isWalking = false; 
-    public float stepInterval = 0.5f; 
+    public bool SoundOn = true;
+    public bool MusicOn = true;
+
+    public AudioClip[] footSteps;
+    private AudioSource source;
+    private bool isWalking = false;
+    public float stepInterval = 0.5f;
 
     void Start()
     {
         source = GetComponent<AudioSource>();
+    }
+
+    public void TurnSoundOn()
+    {
+
+    }
+
+    public void TurnSoundOff()
+    {
+        
     }
 
     public void StartFootsteps()
@@ -26,12 +40,13 @@ public class AudioManager : MonoBehaviour
     {
         isWalking = false;
     }
+
     private IEnumerator PlayFootsteps()
     {
         while (isWalking)
         {
             AudioClip clip = footSteps[Random.Range(0, footSteps.Length)];
-            source.PlayOneShot(clip); 
+            source.PlayOneShot(clip);
             yield return new WaitForSeconds(stepInterval);
         }
     }
