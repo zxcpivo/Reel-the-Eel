@@ -12640,10 +12640,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 203663292031108728, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 914480560063769678, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: audioManager
       value: 
@@ -12657,37 +12653,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1785034209}
     - target: {fileID: 3260957952155189256, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: codSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 9d24f9c44624a6e43b00196a39d250e1, type: 3}
-    - target: {fileID: 3260957952155189256, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: toonaSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4b6a9777f6696014fae3f61b58e6d9a0, type: 3}
-    - target: {fileID: 3260957952155189256, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: salmonSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b12e123ca5f93fd4797580bffacbc906, type: 3}
-    - target: {fileID: 3260957952155189256, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 702012595}
-    - target: {fileID: 8709816455727627319, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.40924823
-      objectReference: {fileID: 0}
-    - target: {fileID: 8709816455727627319, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.91925997
-      objectReference: {fileID: 0}
-    - target: {fileID: 8709816455727627319, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.499
-      objectReference: {fileID: 0}
-    - target: {fileID: 8709816455727627319, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.2614
-      objectReference: {fileID: 0}
     - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.4219
