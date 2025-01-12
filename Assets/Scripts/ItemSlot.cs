@@ -30,6 +30,11 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public bool thisItemSelected;     // Tracks if this slot is selected
 
     private InventoryManager inventoryManager;
+    //===Item Description ==//
+    public Image itemDescriptionImage;
+    public TMP_Text itemDescriptionNameText;
+    public TMP_Text itemDescriptionText;
+    
 
     private void Start()
     {
