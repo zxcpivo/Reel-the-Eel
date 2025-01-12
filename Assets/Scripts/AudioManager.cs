@@ -4,9 +4,6 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    public bool SoundOn = true;
-    public bool MusicOn = true;
-
     public AudioClip[] footSteps;
     private AudioSource source;
     private bool isWalking = false;
@@ -15,16 +12,23 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         source = GetComponent<AudioSource>();
+
+        if (SettingsManager.Instance == null)
+        {
+            SettingsManager.Instance = FindObjectOfType<SettingsManager>();
+            if (SettingsManager.Instance == null)
+            {
+                Debug.LogError("SettingsManager not found in the scene.");
+            }
+        }
     }
 
-    public void TurnSoundOn()
+    void Update()
     {
-
-    }
-
-    public void TurnSoundOff()
-    {
-        
+        if (SettingsManager.Instance != null)
+        {
+            print(SettingsManager.Instance.GetSound());
+        }
     }
 
     public void StartFootsteps()
@@ -43,7 +47,7 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator PlayFootsteps()
     {
-        while (isWalking)
+        while (isWalking && SettingsManager.Instance.GetSound())
         {
             AudioClip clip = footSteps[Random.Range(0, footSteps.Length)];
             source.PlayOneShot(clip);
@@ -51,3 +55,4 @@ public class AudioManager : MonoBehaviour
         }
     }
 }
+
