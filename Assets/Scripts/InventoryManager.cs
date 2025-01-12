@@ -17,8 +17,19 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         Controller = FindObjectOfType<CharacterController2D>();
+        InitializeInventory();
     }
-
+    public void InitializeInventory()
+    {
+        // Initialize all item slots
+        foreach (var slot in itemSlot)
+        {
+            if (slot != null)
+            {
+                slot.ClearSlot();
+            }
+        }
+    }
     void Update()
     {
         if (Input.GetButtonDown("Inventory") && menuActivated)
