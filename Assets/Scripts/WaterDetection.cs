@@ -10,6 +10,11 @@ public class WaterDetection : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
+
+        if (SettingsManager.Instance == null)
+        {
+            SettingsManager.Instance = FindObjectOfType<SettingsManager>();
+        }
     }
     void Update()
     {
@@ -29,7 +34,8 @@ public class WaterDetection : MonoBehaviour
                     Debug.Log("water");
                     gameScript.isFishing = true;
                     gameScript.StartCasting();
-                    audioSource.PlayOneShot(splashSound);
+                    if(SettingsManager.Instance.GetSound())
+                        audioSource.PlayOneShot(splashSound);
                     
                 }
                 else

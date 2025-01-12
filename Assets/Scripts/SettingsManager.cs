@@ -8,6 +8,7 @@ public class SettingsManager : MonoBehaviour
     private bool soundOn;
     private bool musicOn;
 
+
     void Awake()
     {
         if (Instance == null)
