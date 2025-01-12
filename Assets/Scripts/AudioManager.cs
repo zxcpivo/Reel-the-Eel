@@ -16,10 +16,6 @@ public class AudioManager : MonoBehaviour
         if (SettingsManager.Instance == null)
         {
             SettingsManager.Instance = FindObjectOfType<SettingsManager>();
-            if (SettingsManager.Instance == null)
-            {
-                Debug.LogError("SettingsManager not found in the scene.");
-            }
         }
     }
 
