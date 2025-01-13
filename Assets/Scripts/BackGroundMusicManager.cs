@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class BackGroundMusicManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public AudioClip[] tracks;
+    private AudioSource source;
+
+    float timer = 0;
+    int count = 0;
+
     void Start()
     {
-        
+        source = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (timer <= 0)
+        {
+            // start new track
+            AudioClip clip = tracks[count % tracks.Length];
+            source.PlayOneShot(clip);
+            timer = clip.length;
+            count += 1;
+        }
+
+        timer -= Time.deltaTime;
+       
     }
+
 }

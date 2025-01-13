@@ -6,10 +6,8 @@ public class AudioManager : MonoBehaviour
 {
     public AudioClip[] footSteps;
     private AudioSource source;
-    private bool isWalking = false;
+    private bool isWalking = false; 
     public float stepInterval = 0.5f;
-
-    public AudioClip[] backgroundMusic;
 
     void Start()
     {
@@ -19,6 +17,8 @@ public class AudioManager : MonoBehaviour
         {
             SettingsManager.Instance = FindObjectOfType<SettingsManager>();
         }
+
+
     }
 
     void Update()
