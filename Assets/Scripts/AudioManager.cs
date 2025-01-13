@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     private bool isWalking = false;
     public float stepInterval = 0.5f;
 
+    public AudioClip[] backgroundMusic;
+
     void Start()
     {
         source = GetComponent<AudioSource>();
