@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public List<Fish> fishInventory = new List<Fish>();
     public GameObject Inventory;
     public GameObject InventoryMenu;
     public GameObject InventoryCanvas;
@@ -67,8 +68,12 @@ public class InventoryManager : MonoBehaviour
     }
     public void AddFishToInventory(Fish fish, Sprite fishSprite)
     {
+        fishInventory.Add(fish);
         AddItem(fish.Name, fish.Weight, fish.Quantity, fishSprite, "Caught Sprite");
     }
+
+
+
     public void SelectSlot(ItemSlot slot)
     {
         // Deselect the previously selected slot
