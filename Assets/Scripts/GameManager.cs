@@ -33,9 +33,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void StopCasting()
+    public void ChangeRodLuck(int luck)
     {
-
+        rodLuck = luck;
     }
 
     public void StartCasting()

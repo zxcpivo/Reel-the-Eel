@@ -6,7 +6,7 @@ public class FishingBarScript : MonoBehaviour
 {
     public Rigidbody rb;
     public bool atTop;
-    private float rodStrength = 1.3f;
+    private float rodStrength = 1.4f;
     public float targetTime = 4.0f;
     public float savedTargetTime;
 
@@ -38,7 +38,7 @@ public class FishingBarScript : MonoBehaviour
 
         if(targetTime <= 0.0f) // losing game
         {
-            transform.localPosition = new Vector3(-0.5f, -2f, 0);
+            transform.localPosition = new Vector3(-0.5f, -1.7f, 0);
             onFish = false;
             targetTime = 4.0f;
             gameScript.FishingMinigameLost();
@@ -46,7 +46,7 @@ public class FishingBarScript : MonoBehaviour
 
         if (targetTime >= 8.0f) // winning game
         {
-            transform.localPosition = new Vector3(-0.5f, -2f, 0);
+            transform.localPosition = new Vector3(-0.5f, -1.7f, 0);
             onFish = false;
             targetTime = 4.0f;
             gameScript.FishingMinigameWon();
@@ -172,5 +172,10 @@ public class FishingBarScript : MonoBehaviour
         {
             onFish = false;
         }
+    }
+
+    public void ChangeRodStrength(float strength)
+    {
+        rodStrength = strength;
     }
 }
