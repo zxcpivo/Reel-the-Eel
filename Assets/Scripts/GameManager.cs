@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator CastCoroutine()
     {
-        print("casting");
         int randomNum = 0;
         while (randomNum != 1)
         {
@@ -64,22 +63,16 @@ public class GameManager : MonoBehaviour
         {
             currentFish = "cod";
             fishingGame.SetActive(true);
-
-            print("reeling a cod");
         }
         else if(51 <= Luck && Luck <= 75)
         {
             currentFish = "salmon";
             fishingGame.SetActive(true);
-
-            print("reeling a salmon");
         }
         else if(76 <= Luck && Luck <= 90)
         {
             currentFish = "toona";
             fishingGame.SetActive(true);
-
-            print("reeling a toona");
         }
     }
 

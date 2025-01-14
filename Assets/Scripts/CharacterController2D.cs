@@ -67,7 +67,6 @@ public class CharacterController2D : MonoBehaviour
 
     private void Move()
     {
-        Debug.Log(motionVector.magnitude);
 
         if (motionVector == Vector2.zero)
             _rigidBody2d.velocity = Vector2.zero;

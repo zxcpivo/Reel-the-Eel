@@ -12996,10 +12996,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 501712947554114350, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_Mass
-      value: 17
-      objectReference: {fileID: 0}
     - target: {fileID: 914480560063769678, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: audioManager
       value: 
@@ -13016,18 +13012,6 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 702012595}
-    - target: {fileID: 6288707391627689767, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_Size.y
-      value: 2.4958189
-      objectReference: {fileID: 0}
-    - target: {fileID: 6288707391627689767, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_Center.x
-      value: 0.0000002187894
-      objectReference: {fileID: 0}
-    - target: {fileID: 6288707391627689767, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_Center.y
-      value: 0.74790907
-      objectReference: {fileID: 0}
     - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.4219

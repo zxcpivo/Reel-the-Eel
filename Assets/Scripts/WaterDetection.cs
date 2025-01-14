@@ -27,23 +27,19 @@ public class WaterDetection : MonoBehaviour
 
             if (hit.collider != null && gameScript.isFishing == false)
             {
-                Debug.Log($"Hit Collider: {hit.collider.name}, Tag: {hit.collider.tag}");
 
                 if (hit.collider.CompareTag("Water"))
                 {
-                    Debug.Log("water");
                     gameScript.isFishing = true;
                     gameScript.StartCasting();
                     if(SettingsManager.Instance.GetSound())
                         audioSource.PlayOneShot(splashSound);
                     
                 }
-                else
-                    Debug.Log("not water");
             }
             else if(hit.collider == null  && gameScript.isFishing == false)
             {
-                print("not water");
+
             }
         }
     }

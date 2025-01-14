@@ -21,14 +21,6 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (SettingsManager.Instance != null)
-        {
-            print(SettingsManager.Instance.GetSound());
-        }
-    }
-
     public void StartFootsteps()
     {
         if (!isWalking)
