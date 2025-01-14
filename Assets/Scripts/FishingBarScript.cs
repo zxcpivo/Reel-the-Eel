@@ -38,7 +38,7 @@ public class FishingBarScript : MonoBehaviour
 
         if(targetTime <= 0.0f) // losing game
         {
-            transform.localPosition = new Vector3(-0.5f, -1.7f, 0);
+            transform.localPosition = new Vector3(-0.5f, -1.3f, 0);
             onFish = false;
             targetTime = 4.0f;
             gameScript.FishingMinigameLost();
@@ -46,7 +46,7 @@ public class FishingBarScript : MonoBehaviour
 
         if (targetTime >= 8.0f) // winning game
         {
-            transform.localPosition = new Vector3(-0.5f, -1.7f, 0);
+            transform.localPosition = new Vector3(-0.5f, -1.3f, 0);
             onFish = false;
             targetTime = 4.0f;
             gameScript.FishingMinigameWon();

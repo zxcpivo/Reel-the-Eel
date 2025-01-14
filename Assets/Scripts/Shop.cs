@@ -7,6 +7,8 @@ public class Shop : MonoBehaviour
     public GameManager gameScript;
     public FishingBarScript fishGameScript;
     public GameObject shopObject;
+    public GameObject shopCanvas;
+    public GameObject sellCanvas;
     private bool shopActivated;
     private string EquippedRodKey = "EquippedRod";
 
@@ -20,6 +22,8 @@ public class Shop : MonoBehaviour
         Time.timeScale = 0;
         shopActivated = true;
         shopObject.SetActive(shopActivated);
+        shopCanvas.SetActive(true);
+        sellCanvas.SetActive(false);
     }
 
     public void ExitShop()
@@ -27,7 +31,23 @@ public class Shop : MonoBehaviour
         Time.timeScale = 1;
         shopActivated = false;
         shopObject.SetActive(shopActivated);
+        shopCanvas.SetActive(false);
+        sellCanvas.SetActive(false);
     }
+
+    public void EnterSell()
+    {
+        shopCanvas.SetActive(false);
+        sellCanvas.SetActive(true);
+    }
+
+    public void ExitSell()
+    {
+        sellCanvas.SetActive(false);
+        shopCanvas.SetActive(true);
+
+    }
+
     public void PurchaseBeginnerRod()
     {
         EquipRod("BeginnerRod", 50, 1f);
