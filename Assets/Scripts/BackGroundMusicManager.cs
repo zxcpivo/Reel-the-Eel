@@ -13,11 +13,16 @@ public class BackGroundMusicManager : MonoBehaviour
     void Start()
     {
         source = GetComponent<AudioSource>();
+
+        if (SettingsManager.Instance == null)
+        {
+            SettingsManager.Instance = FindObjectOfType<SettingsManager>();
+        }
     }
 
     void Update()
     {
-        if (timer <= 0)
+        if (timer <= 0 && SettingsManager.Instance.GetMusic())
         {
             // start new track
             AudioClip clip = tracks[count % tracks.Length];
