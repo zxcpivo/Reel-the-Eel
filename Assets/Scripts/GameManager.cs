@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void Reel()
     {
-        int Luck = Random.Range(1, 100);
+        int Luck = Random.Range(1, 90);
         if(Luck <= 50)
         {
             currentFish = "cod";

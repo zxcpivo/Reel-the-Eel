@@ -15,6 +15,10 @@ public class InventoryManager : MonoBehaviour
     private ItemSlot currentlySelectedSlot;
     private CharacterController2D Controller;
     public GameManager gameManager;
+
+    public Sprite codSprite;
+    public Sprite salmonSprite;
+    public Sprite toonaSprite;
     void Start()
     {
         Controller = FindObjectOfType<CharacterController2D>();
@@ -87,5 +91,58 @@ public class InventoryManager : MonoBehaviour
         currentlySelectedSlot = slot;
         currentlySelectedSlot.selectedShader.SetActive(true);
         currentlySelectedSlot.thisItemSelected = true;
+    }
+
+    public void SortByName()
+    {
+        InitializeInventory();
+        List<Fish>[] pigeonholes = new List<Fish>[26]; // 26 buckets one for each letter of the alphabet
+        for (int i = 0; i < 26; i++)
+        {
+            pigeonholes[i] = new List<Fish>();
+        }
+
+        foreach (Fish fish in fishInventory)
+        {
+            char firstLetter = char.ToLower(fish.Name[0]); // Normalize to lowercase
+            int index = firstLetter - 'a'; // Calculate the index (0 for 'a', 1 for 'b', etc.)
+            pigeonholes[index].Add(fish);
+
+        }
+
+        fishInventory.Clear();
+        foreach (List<Fish> bucket in pigeonholes)
+        {
+            foreach (Fish fish in bucket)
+            {
+                string fishType = CutOffNumber(fish.Name);
+
+                if (fishType == "Cod")
+                    AddFishToInventory(fish, codSprite);
+                else if (fishType == "Salmon")
+                    AddFishToInventory(fish, salmonSprite);
+                else if (fishType == "Toona")
+                    AddFishToInventory(fish, toonaSprite);
+            }
+        }
+    }
+
+public string CutOffNumber(string fishName)
+    {
+        int index = fishName.Length - 1;
+        while (index >= 0 && char.IsDigit(fishName[index]))
+        {
+            index -= 1;
+        }
+
+        return fishName.Substring(0, index + 1);
+    }
+
+    public void PrintList()
+    {
+        foreach(Fish fish in fishInventory)
+        {
+            print($"{fish.Name}, {fish.Weight}");
+        }
     }
 }

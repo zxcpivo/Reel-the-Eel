@@ -118,7 +118,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         thisItemSelected = false;
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         // Update the item image
         if (itemImage != null)
