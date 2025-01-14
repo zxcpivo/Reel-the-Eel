@@ -1,6 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+
+[System.Serializable]
+public class FishInventoryData
+{
+    public List<Fish> fishInventory = new List<Fish>();
+}
 
 public class InventoryManager : MonoBehaviour
 {
@@ -11,7 +18,6 @@ public class InventoryManager : MonoBehaviour
     private bool menuActivated;
     public ItemSlot[] itemSlot;
 
-    // Add this variable to track the selected slot
     private ItemSlot currentlySelectedSlot;
     private CharacterController2D Controller;
     public GameManager gameManager;
@@ -19,14 +25,35 @@ public class InventoryManager : MonoBehaviour
     public Sprite codSprite;
     public Sprite salmonSprite;
     public Sprite toonaSprite;
+
+    private string filePath;
+
     void Start()
     {
         Controller = FindObjectOfType<CharacterController2D>();
+        filePath = Path.Combine(Application.persistentDataPath, "fishInventory.json");
+        LoadInventory();
+
+        // If the file doesn't exist, initialize the inventory and save it.
+        if (fishInventory.Count == 0)
+        {
+            Debug.LogWarning("Initializing default inventory.");
+            InitializeDefaultInventory();
+            SaveInventory();
+        }
+
         InitializeInventory();
     }
+
+    private void InitializeDefaultInventory()
+    {
+        fishInventory.Add(new Fish("Cod", 5, 2, 1, 1.0f));
+        fishInventory.Add(new Fish("Salmon", 7, 1, 1, 1.5f));
+        fishInventory.Add(new Fish("Toona", 6, 3, 1, 2.0f));
+    }
+
     public void InitializeInventory()
     {
-        // Initialize all item slots
         foreach (var slot in itemSlot)
         {
             if (slot != null)
@@ -35,6 +62,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
     void Update()
     {
         if (Input.GetButtonDown("Inventory") && menuActivated)
@@ -59,7 +87,7 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (!itemSlot[i].isFull == false && itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0)
+            if (!itemSlot[i].isFull && (itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0))
             {
                 int leftOverItems = itemSlot[i].AddItem(itemName, weight, quantity, itemSprite, itemDescription);
                 if (leftOverItems > 0)
@@ -70,24 +98,21 @@ public class InventoryManager : MonoBehaviour
         }
         return quantity;
     }
+
     public void AddFishToInventory(Fish fish, Sprite fishSprite)
     {
         fishInventory.Add(fish);
         AddItem(fish.Name, fish.Weight, fish.Quantity, fishSprite, "Caught Sprite");
     }
 
-
-
     public void SelectSlot(ItemSlot slot)
     {
-        // Deselect the previously selected slot
         if (currentlySelectedSlot != null)
         {
             currentlySelectedSlot.selectedShader.SetActive(false);
             currentlySelectedSlot.thisItemSelected = false;
         }
 
-        // Select the new slot
         currentlySelectedSlot = slot;
         currentlySelectedSlot.selectedShader.SetActive(true);
         currentlySelectedSlot.thisItemSelected = true;
@@ -96,7 +121,7 @@ public class InventoryManager : MonoBehaviour
     public void SortByName()
     {
         InitializeInventory();
-        List<Fish>[] pigeonholes = new List<Fish>[26]; // 26 buckets one for each letter of the alphabet
+        List<Fish>[] pigeonholes = new List<Fish>[26];
         for (int i = 0; i < 26; i++)
         {
             pigeonholes[i] = new List<Fish>();
@@ -104,10 +129,9 @@ public class InventoryManager : MonoBehaviour
 
         foreach (Fish fish in fishInventory)
         {
-            char firstLetter = char.ToLower(fish.Name[0]); // Normalize to lowercase
-            int index = firstLetter - 'a'; // Calculate the index (0 for 'a', 1 for 'b', etc.)
+            char firstLetter = char.ToLower(fish.Name[0]);
+            int index = firstLetter - 'a';
             pigeonholes[index].Add(fish);
-
         }
 
         fishInventory.Clear();
@@ -127,7 +151,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-public string CutOffNumber(string fishName)
+    public string CutOffNumber(string fishName)
     {
         int index = fishName.Length - 1;
         while (index >= 0 && char.IsDigit(fishName[index]))
@@ -140,9 +164,32 @@ public string CutOffNumber(string fishName)
 
     public void PrintList()
     {
-        foreach(Fish fish in fishInventory)
+        foreach (Fish fish in fishInventory)
         {
             print($"{fish.Name}, {fish.Weight}");
+        }
+    }
+
+    public void SaveInventory()
+    {
+        FishInventoryData data = new FishInventoryData { fishInventory = this.fishInventory };
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(filePath, json);
+        Debug.Log("Inventory saved to " + filePath);
+    }
+
+    public void LoadInventory()
+    {
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            FishInventoryData data = JsonUtility.FromJson<FishInventoryData>(json);
+            this.fishInventory = data.fishInventory;
+            Debug.Log("Inventory loaded from " + filePath);
+        }
+        else
+        {
+            Debug.LogWarning("Save file not found: " + filePath);
         }
     }
 }
