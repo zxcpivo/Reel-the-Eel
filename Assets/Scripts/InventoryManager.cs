@@ -30,16 +30,30 @@ public class InventoryManager : MonoBehaviour
 
     void Start()
     {
+
         Controller = FindObjectOfType<CharacterController2D>();
         filePath = Path.Combine(Application.persistentDataPath, "fishInventory.json");
         LoadInventory();
 
+        Inventory.SetActive(true);
+
+
         // If the file doesn't exist, initialize the inventory and save it.
         if (fishInventory.Count == 0)
         {
-            Debug.LogWarning("Initializing default inventory.");
+            Debug.Log("Initializing default inventory.");
             SaveInventory();
-        }     
+        }
+
+        StartCoroutine(DelayedSort());
+    }
+
+    private IEnumerator DelayedSort()
+    {
+        yield return new WaitForSeconds(0.1f);
+        SortByName();
+        PrintList();
+        Inventory.SetActive(false);
     }
 
 
@@ -122,7 +136,6 @@ public class InventoryManager : MonoBehaviour
         {
             pigeonholes[i] = new List<Fish>();
         }
-
         foreach (Fish fish in fishInventory)
         {
             char firstLetter = char.ToLower(fish.Name[0]);
@@ -135,6 +148,7 @@ public class InventoryManager : MonoBehaviour
         {
             foreach (Fish fish in bucket)
             {
+                //PrintList();
                 string fishType = CutOffNumber(fish.Name);
                 if (fishType == "Cod")
                     AddFishToInventory(fish, codSprite);
@@ -180,7 +194,7 @@ public class InventoryManager : MonoBehaviour
             string json = File.ReadAllText(filePath);
             FishInventoryData data = JsonUtility.FromJson<FishInventoryData>(json);
             this.fishInventory = data.fishInventory;
-            Debug.Log("Inventory loaded from " + filePath);
+            Debug.Log("Inventory loaded from " + json);
         }
         else
         {
