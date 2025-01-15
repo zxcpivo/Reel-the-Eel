@@ -992,13 +992,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_42
+      name: rock_land_2
       rect:
         serializedVersion: 2
         x: 64
-        y: 544
-        width: 16
-        height: 16
+        y: 528
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -9057,13 +9057,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_423
+      name: rock_land
       rect:
         serializedVersion: 2
         x: 144
-        y: 384
-        width: 16
-        height: 16
+        y: 368
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -22706,6 +22706,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Overworld_1073
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 560
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88fbdad9b8a1241408fe53ff561b7a8f
+      internalID: -1042333506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -22801,6 +22822,7 @@ TextureImporter:
       Overworld_1070: 889064099
       Overworld_1071: 1948809601
       Overworld_1072: 1174679924
+      Overworld_1073: -1042333506
       Overworld_108: -2036237797
       Overworld_109: 1458673412
       Overworld_11: -479634471
@@ -23147,11 +23169,9 @@ TextureImporter:
       Overworld_417: 2052651647
       Overworld_418: -797612446
       Overworld_419: -1356743906
-      Overworld_42: 154928299
       Overworld_420: -890238754
       Overworld_421: -94353271
       Overworld_422: 1199563287
-      Overworld_423: -507987531
       Overworld_424: 1216743180
       Overworld_425: -1885270123
       Overworld_426: -1524714541
@@ -23790,6 +23810,8 @@ TextureImporter:
       Overworld_997: -34816518
       Overworld_998: 755146610
       Overworld_999: 1858241214
+      rock_land: -507987531
+      rock_land_2: 154928299
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
