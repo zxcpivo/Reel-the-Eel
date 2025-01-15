@@ -15,12 +15,13 @@ public class SettingsManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            LoadPreferences();
+      
         }
         else
         {
             Destroy(gameObject);
         }
+        LoadPreferences();
     }
 
     public void TurnSoundOn()
