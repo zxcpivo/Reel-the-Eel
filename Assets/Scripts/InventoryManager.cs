@@ -38,19 +38,10 @@ public class InventoryManager : MonoBehaviour
         if (fishInventory.Count == 0)
         {
             Debug.LogWarning("Initializing default inventory.");
-            InitializeDefaultInventory();
             SaveInventory();
-        }
-
-        InitializeInventory();
+        }     
     }
 
-    private void InitializeDefaultInventory()
-    {
-        fishInventory.Add(new Fish("Cod", 5, 2, 1, 1.0f));
-        fishInventory.Add(new Fish("Salmon", 7, 1, 1, 1.5f));
-        fishInventory.Add(new Fish("Toona", 6, 3, 1, 2.0f));
-    }
 
     public void InitializeInventory()
     {
@@ -62,6 +53,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
 
     void Update()
     {
@@ -97,6 +89,10 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return quantity;
+    }
+    private void OnApplicationQuit()
+    {
+        SaveInventory();
     }
 
     public void AddFishToInventory(Fish fish, Sprite fishSprite)
@@ -140,7 +136,6 @@ public class InventoryManager : MonoBehaviour
             foreach (Fish fish in bucket)
             {
                 string fishType = CutOffNumber(fish.Name);
-
                 if (fishType == "Cod")
                     AddFishToInventory(fish, codSprite);
                 else if (fishType == "Salmon")
