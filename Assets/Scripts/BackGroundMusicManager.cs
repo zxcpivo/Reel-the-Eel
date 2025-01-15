@@ -13,11 +13,6 @@ public class BackGroundMusicManager : MonoBehaviour
     void Start()
     {
         source = GetComponent<AudioSource>();
-
-        if (SettingsManager.Instance == null)
-        {
-            SettingsManager.Instance = FindObjectOfType<SettingsManager>();
-        }
     }
 
     void Update()
@@ -30,9 +25,12 @@ public class BackGroundMusicManager : MonoBehaviour
             timer = clip.length;
             count += 1;
         }
+        if (!SettingsManager.Instance.GetMusic())
+        {
+            source.volume = 0f;
+        }
 
         timer -= Time.deltaTime;
-       
     }
 
 }

@@ -9,6 +9,22 @@ public class AudioManager : MonoBehaviour
     private bool isWalking = false; 
     public float stepInterval = 0.5f;
 
+    public static AudioManager Instance; // Singleton instance
+
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         source = GetComponent<AudioSource>();
