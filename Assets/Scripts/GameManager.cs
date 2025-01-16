@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Fish> fishInventory = new List<Fish>();
     public Button minigameButton;
     public Canvas canvas;
 
@@ -117,7 +116,6 @@ public class GameManager : MonoBehaviour
             newFish = new Fish($"Toona", weight, 1, 20, weight * 2f);
             fishSprite = toonaSprite;
         }
-        fishInventory.Add(newFish);
         inventoryManager.AddFishToInventory(newFish, fishSprite);
     }
 
