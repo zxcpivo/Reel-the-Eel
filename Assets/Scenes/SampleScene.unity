@@ -2952,10 +2952,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScript: {fileID: 696475588}
+  inventoryScript: {fileID: 702012595}
   fishGameScript: {fileID: 429312534}
   shopObject: {fileID: 1243792785}
   shopCanvas: {fileID: 1978549446}
   sellCanvas: {fileID: 1243122760}
+  AryaCollider: {fileID: 433654343}
 --- !u!65 &433654343
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2975,8 +2977,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4539703, y: 1.2751336, z: 0.20000002}
-  m_Center: {x: -0.03439165, y: 0.1375666, z: 0}
+  m_Size: {x: 1.0940176, y: 1.0735598, z: 0.20000002}
+  m_Center: {x: -0.012794642, y: 0.036779743, z: 0}
 --- !u!1 &438192267
 GameObject:
   m_ObjectHideFlags: 0
@@ -7841,11 +7843,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2428520788242082212, guid: b26f6ba457c4f7a44bc16d347c8fbac1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2428520788242082212, guid: b26f6ba457c4f7a44bc16d347c8fbac1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.009
       objectReference: {fileID: 0}
     - target: {fileID: 2428520788242082212, guid: b26f6ba457c4f7a44bc16d347c8fbac1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9168,7 +9170,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1392582044}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 433654342}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: SellCod
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1392582044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26416,6 +26430,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215981377524299752, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

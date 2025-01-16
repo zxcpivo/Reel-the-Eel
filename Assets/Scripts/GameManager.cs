@@ -10,13 +10,13 @@ public class GameManager : MonoBehaviour
     public Button minigameButton;
     public Canvas canvas;
 
-    public int Index = 0;
-
     private int rodLuck = 5; // set private so that the inspector doesn't change it
 
     private string currentFish = "";
 
     public GameObject fishingGame;
+    public GameObject Bobber;
+    public GameObject Exclamation;
 
     public bool isFishing = false;
     public InventoryManager inventoryManager;
@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         fishingGame.SetActive(false);
+        Bobber.SetActive(false);
+        Exclamation.SetActive(false);
     }
     void Update()
     {
@@ -38,26 +40,28 @@ public class GameManager : MonoBehaviour
         rodLuck = luck;
     }
 
-    public void StartCasting()
+    public void StartCasting(Vector3 mousePosition)
     {
-        StartCoroutine(CastCoroutine());
+        StartCoroutine(CastCoroutine(mousePosition));
     }
 
-    public IEnumerator CastCoroutine()
+    public IEnumerator CastCoroutine(Vector3 mousePosition)
     {
+        Bobber.SetActive(true);
+        Bobber.transform.position = mousePosition;
         int randomNum = 0;
         while (randomNum != 1)
         {
-            print(randomNum);
             randomNum = Random.Range(1, rodLuck);
             yield return new WaitForSeconds(0.1f);
         }
-
+        Bobber.SetActive(false);
         Reel();
     }
 
     public void Reel()
     {
+        Exclamation.SetActive(true);
         int Luck = Random.Range(1, 90);
         if(Luck <= 50)
         {
@@ -85,40 +89,35 @@ public class GameManager : MonoBehaviour
 
     public void FishingMinigameLost()
     {
+        Exclamation.SetActive(false);
         fishingGame.SetActive(false);
         isFishing = false;
     }
 
     public void CatchFish(string name)
     {
+        Exclamation.SetActive(false);
         Fish newFish = null;
         Sprite fishSprite = null;
         if (name == "cod")
         {
             int weight = Random.Range(1, 10);
-            newFish = new Fish($"Cod{Index}", weight, 1, 10, weight * 1f);
+            newFish = new Fish($"Cod", weight, 1, 10, weight * 1f);
             fishSprite = codSprite;
         }
         else if (name == "salmon")
         {
             int weight = Random.Range(10, 20);
-            newFish = new Fish($"Salmon{Index}", weight, 1, 20, weight * 1.5f);
+            newFish = new Fish($"Salmon", weight, 1, 20, weight * 1.5f);
             fishSprite = salmonSprite;
         }
         else if (name == "toona")
         {
             int weight = Random.Range(10, 20);
-            newFish = new Fish($"Toona{Index}", weight, 1, 20, weight * 2f);
+            newFish = new Fish($"Toona", weight, 1, 20, weight * 2f);
             fishSprite = toonaSprite;
         }
-        print($"Added a {newFish.Name} that weighs {newFish.Weight}");
         fishInventory.Add(newFish);
-        Index += 1;
-        if (inventoryManager == null)
-        {
-            Debug.LogError("InventoryManager is not assigned in the GameManager!");
-            return;
-        }
         inventoryManager.AddFishToInventory(newFish, fishSprite);
     }
 

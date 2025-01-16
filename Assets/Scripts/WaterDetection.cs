@@ -31,7 +31,7 @@ public class WaterDetection : MonoBehaviour
                 if (hit.collider.CompareTag("Water"))
                 {
                     gameScript.isFishing = true;
-                    gameScript.StartCasting();
+                    gameScript.StartCasting(mousePosition);
                     if(SettingsManager.Instance.GetSound())
                         audioSource.PlayOneShot(splashSound);
                     

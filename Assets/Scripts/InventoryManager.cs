@@ -148,27 +148,14 @@ public class InventoryManager : MonoBehaviour
         {
             foreach (Fish fish in bucket)
             {
-                //PrintList();
-                string fishType = CutOffNumber(fish.Name);
-                if (fishType == "Cod")
+                if (fish.Name == "Cod")
                     AddFishToInventory(fish, codSprite);
-                else if (fishType == "Salmon")
+                else if (fish.Name == "Salmon")
                     AddFishToInventory(fish, salmonSprite);
-                else if (fishType == "Toona")
+                else if (fish.Name == "Toona")
                     AddFishToInventory(fish, toonaSprite);
             }
         }
-    }
-
-    public string CutOffNumber(string fishName)
-    {
-        int index = fishName.Length - 1;
-        while (index >= 0 && char.IsDigit(fishName[index]))
-        {
-            index -= 1;
-        }
-
-        return fishName.Substring(0, index + 1);
     }
 
     public void PrintList()
