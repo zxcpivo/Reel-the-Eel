@@ -28,13 +28,16 @@ public class Item : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            int leftOverItems = inventoryManager.AddItem(itemName, weight, quantity, sprite, itemDescription);
+            // Add each item individually to the inventory (quantity is treated as 1)
+            int leftOverItems = inventoryManager.AddItem(itemName, weight, 1, sprite, itemDescription);
+
             if (leftOverItems <= 0)
-                Destroy(gameObject);
+                Destroy(gameObject); // Destroy the item if added to inventory
             else
-                quantity = leftOverItems;
+                quantity = leftOverItems; // Update the quantity if there are leftovers
         }
     }
+
 }

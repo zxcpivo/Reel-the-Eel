@@ -52,34 +52,25 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public int AddItem(string itemName, int weight, int quantity, Sprite itemSprite, string itemDescription)
     {
+        // Check if the slot is full, if it is, don't add the item
         if (isFull)
             return quantity;
 
+        // Place the item in the slot (don't stack, just replace the item)
         this.itemName = itemName;
         this.weight = weight;
         this.itemSprite = itemSprite;
         this.itemDescription = itemDescription;
-        this.quantity += quantity;
+        this.quantity = 1; // Each item will now be treated as a single item
 
-        // Handle overflow of items beyond max capacity
-        if (this.quantity > maxNumberOfItems)
-        {
-            int extraItems = this.quantity - maxNumberOfItems;
-            this.quantity = maxNumberOfItems;
-            isFull = true;
-            UpdateUI();
-            return extraItems;
-        }
+        // Mark the slot as full once an item is placed
+        isFull = true;
 
-        // Mark as full if capacity is reached
-        if (this.quantity == maxNumberOfItems)
-        {
-            isFull = true;
-        }
-
+        // Update the UI for this slot
         UpdateUI();
-        return 0;
+        return 0; // No leftover items since we don't stack
     }
+
 
     public void ClearSlot()
     {

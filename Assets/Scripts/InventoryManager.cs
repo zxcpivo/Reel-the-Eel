@@ -93,17 +93,18 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (!itemSlot[i].isFull && (itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0))
+            if (!itemSlot[i].isFull)  // Find an empty slot
             {
-                int leftOverItems = itemSlot[i].AddItem(itemName, weight, quantity, itemSprite, itemDescription);
-                if (leftOverItems > 0)
-                    leftOverItems = AddItem(itemName, weight, leftOverItems, itemSprite, itemDescription);
-
-                return leftOverItems;
+                // Add the item to this slot
+                itemSlot[i].AddItem(itemName, weight, 1, itemSprite, itemDescription); // Only add one item at a time
+                return 0; // No leftover items
             }
         }
+
+        // If there is no empty slot, return the quantity as is (unable to add more items)
         return quantity;
     }
+
     private void OnApplicationQuit()
     {
         SaveInventory();

@@ -22,16 +22,15 @@ public class GameManager : MonoBehaviour
     public Sprite codSprite;
     public Sprite salmonSprite;
     public Sprite toonaSprite;
+    public Sprite koiSprite;
+    public Sprite eelSprite;
+    public Sprite anglerSprite;
 
     void Start()
     {
         fishingGame.SetActive(false);
         Bobber.SetActive(false);
         Exclamation.SetActive(false);
-    }
-    void Update()
-    {
-        
     }
 
     public void ChangeRodLuck(int luck)
@@ -61,20 +60,35 @@ public class GameManager : MonoBehaviour
     public void Reel()
     {
         Exclamation.SetActive(true);
-        int Luck = Random.Range(1, 90);
-        if(Luck <= 50)
+        int Luck = Random.Range(1, 1001);
+        if(Luck <= 500)
         {
             currentFish = "cod";
             fishingGame.SetActive(true);
         }
-        else if(51 <= Luck && Luck <= 75)
+        else if(501 <= Luck && Luck <= 750)
         {
             currentFish = "salmon";
             fishingGame.SetActive(true);
         }
-        else if(76 <= Luck && Luck <= 90)
+        else if(751 <= Luck && Luck <= 900)
         {
             currentFish = "toona";
+            fishingGame.SetActive(true);
+        }
+        else if (901 <= Luck && Luck <= 950)
+        {
+            currentFish = "koi";
+            fishingGame.SetActive(true);
+        }
+        else if (951 <= Luck && Luck <= 999)
+        {
+            currentFish = "angler";
+            fishingGame.SetActive(true);
+        }
+        else if (Luck == 1000)
+        {
+            currentFish = "eel";
             fishingGame.SetActive(true);
         }
     }
@@ -115,6 +129,24 @@ public class GameManager : MonoBehaviour
             int weight = Random.Range(10, 20);
             newFish = new Fish($"Toona", weight, 1, 20, weight * 2f);
             fishSprite = toonaSprite;
+        }
+        else if (name == "koi")
+        {
+            int weight = Random.Range(20, 50);
+            newFish = new Fish($"Koi", weight, 1, 20, weight * 1.5f);
+            fishSprite = koiSprite;
+        }
+        else if (name == "angler")
+        {
+            int weight = Random.Range(50, 100);
+            newFish = new Fish($"Angler", weight, 1, 20, weight * 1.5f);
+            fishSprite = anglerSprite;
+        }
+        else if (name == "eel")
+        {
+            int weight = Random.Range(100, 200);
+            newFish = new Fish($"Eel", weight, 1, 20, weight * 2f);
+            fishSprite = eelSprite;
         }
         inventoryManager.AddFishToInventory(newFish, fishSprite);
     }
