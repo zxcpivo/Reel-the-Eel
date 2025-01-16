@@ -25,9 +25,6 @@ public class InventoryManager : MonoBehaviour
     public Sprite codSprite;
     public Sprite salmonSprite;
     public Sprite toonaSprite;
-    public Sprite koiSprite;
-    public Sprite eelSprite;
-    public Sprite anglerSprite;
 
     private string filePath;
 
@@ -96,17 +93,18 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (!itemSlot[i].isFull && (itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0))
+            if (!itemSlot[i].isFull)  // Find an empty slot
             {
-                int leftOverItems = itemSlot[i].AddItem(itemName, weight, quantity, itemSprite, itemDescription);
-                if (leftOverItems > 0)
-                    leftOverItems = AddItem(itemName, weight, leftOverItems, itemSprite, itemDescription);
-
-                return leftOverItems;
+                // Add the item to this slot
+                itemSlot[i].AddItem(itemName, weight, 1, itemSprite, itemDescription); // Only add one item at a time
+                return 0; // No leftover items
             }
         }
+
+        // If there is no empty slot, return the quantity as is (unable to add more items)
         return quantity;
     }
+
     private void OnApplicationQuit()
     {
         SaveInventory();
@@ -157,13 +155,6 @@ public class InventoryManager : MonoBehaviour
                     AddFishToInventory(fish, salmonSprite);
                 else if (fish.Name == "Toona")
                     AddFishToInventory(fish, toonaSprite);
-                else if (fish.Name == "Koi")
-                    AddFishToInventory(fish, koiSprite);
-                else if (fish.Name == "Eel")
-                    AddFishToInventory(fish, eelSprite);
-                else if (fish.Name == "Angler")
-                    AddFishToInventory(fish, anglerSprite);
-
             }
         }
     }
