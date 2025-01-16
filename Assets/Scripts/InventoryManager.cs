@@ -25,6 +25,9 @@ public class InventoryManager : MonoBehaviour
     public Sprite codSprite;
     public Sprite salmonSprite;
     public Sprite toonaSprite;
+    public Sprite koiSprite;
+    public Sprite anglerSprite;
+    public Sprite eelSprite;
 
     private string filePath;
 
@@ -155,6 +158,12 @@ public class InventoryManager : MonoBehaviour
                     AddFishToInventory(fish, salmonSprite);
                 else if (fish.Name == "Toona")
                     AddFishToInventory(fish, toonaSprite);
+                else if (fish.Name == "Koi")
+                    AddFishToInventory(fish, koiSprite);
+                else if (fish.Name == "Angler")
+                    AddFishToInventory(fish, anglerSprite);
+                else if (fish.Name == "Eel")
+                    AddFishToInventory(fish, eelSprite);
             }
         }
     }
