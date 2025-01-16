@@ -4984,7 +4984,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 668848510}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 433654342}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: SellSalmon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &668848510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5471,6 +5483,9 @@ MonoBehaviour:
   codSprite: {fileID: 21300000, guid: 9d24f9c44624a6e43b00196a39d250e1, type: 3}
   salmonSprite: {fileID: 21300000, guid: b12e123ca5f93fd4797580bffacbc906, type: 3}
   toonaSprite: {fileID: 21300000, guid: 4b6a9777f6696014fae3f61b58e6d9a0, type: 3}
+  koiSprite: {fileID: 21300000, guid: 70fa6cbe281ca664a81a31917f9055c0, type: 3}
+  eelSprite: {fileID: 21300000, guid: 524eadc600f6d924c8a78e587b367990, type: 3}
+  anglerSprite: {fileID: 21300000, guid: ebef91a0c274a77458d90b5b4d94d021, type: 3}
 --- !u!4 &702012596
 Transform:
   m_ObjectHideFlags: 0
@@ -8339,7 +8354,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1176006279}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 433654342}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: SellToona
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1176006279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24940,6 +24967,9 @@ MonoBehaviour:
   codSprite: {fileID: 21300000, guid: 9d24f9c44624a6e43b00196a39d250e1, type: 3}
   salmonSprite: {fileID: 21300000, guid: b12e123ca5f93fd4797580bffacbc906, type: 3}
   toonaSprite: {fileID: 21300000, guid: 4b6a9777f6696014fae3f61b58e6d9a0, type: 3}
+  koiSprite: {fileID: 0}
+  eelSprite: {fileID: 0}
+  anglerSprite: {fileID: 0}
 --- !u!4 &1872545485
 Transform:
   m_ObjectHideFlags: 0
@@ -26430,10 +26460,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8851547669941148984, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9215981377524299752, guid: dafe4e85729085e45bcc3333837e9d0c, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

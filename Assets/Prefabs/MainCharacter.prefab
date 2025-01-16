@@ -524,7 +524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7bbd3d0efdb09347a2cd2d221349680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishInventory: []
   minigameButton: {fileID: 6047878786222844009, guid: 40a01896140a4ec4482ab751b772bd93, type: 3}
   canvas: {fileID: 0}
   fishingGame: {fileID: 203663292031108728}
@@ -535,6 +534,9 @@ MonoBehaviour:
   codSprite: {fileID: 21300000, guid: 9d24f9c44624a6e43b00196a39d250e1, type: 3}
   salmonSprite: {fileID: 21300000, guid: b12e123ca5f93fd4797580bffacbc906, type: 3}
   toonaSprite: {fileID: 21300000, guid: 4b6a9777f6696014fae3f61b58e6d9a0, type: 3}
+  koiSprite: {fileID: 21300000, guid: 70fa6cbe281ca664a81a31917f9055c0, type: 3}
+  eelSprite: {fileID: 21300000, guid: 524eadc600f6d924c8a78e587b367990, type: 3}
+  anglerSprite: {fileID: 21300000, guid: ebef91a0c274a77458d90b5b4d94d021, type: 3}
 --- !u!1 &2563291894123268265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,7 +1920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4747305716708254546
 Transform:
   m_ObjectHideFlags: 0
