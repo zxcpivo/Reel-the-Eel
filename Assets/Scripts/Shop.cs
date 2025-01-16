@@ -81,6 +81,7 @@ public class Shop : MonoBehaviour
                 inventoryScript.fishInventory.RemoveAt(i);
             }
         }
+        inventoryScript.SortByName();
     }
 
     public void SellSalmon()
@@ -93,6 +94,7 @@ public class Shop : MonoBehaviour
                 inventoryScript.fishInventory.RemoveAt(i);
             }
         }
+        inventoryScript.SortByName();
     }
 
     public void SellToona()
@@ -105,6 +107,45 @@ public class Shop : MonoBehaviour
                 inventoryScript.fishInventory.RemoveAt(i);
             }
         }
+        inventoryScript.SortByName();
+    }
+
+    public void SellKoi()
+    {
+        for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
+        {
+            if (inventoryScript.fishInventory[i].Name == "Koi")
+            {
+                Money += inventoryScript.fishInventory[i].Value;
+                inventoryScript.fishInventory.RemoveAt(i);
+            }
+        }
+        inventoryScript.SortByName();
+    }
+    public void SellAngler()
+    {
+        for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
+        {
+            if (inventoryScript.fishInventory[i].Name == "Angler")
+            {
+                Money += inventoryScript.fishInventory[i].Value;
+                inventoryScript.fishInventory.RemoveAt(i);
+            }
+        }
+        inventoryScript.SortByName();
+    }
+
+    public void SellEel()
+    {
+        for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
+        {
+            if (inventoryScript.fishInventory[i].Name == "Eel")
+            {
+                Money += inventoryScript.fishInventory[i].Value;
+                inventoryScript.fishInventory.RemoveAt(i);
+            }
+        }
+        inventoryScript.SortByName();
     }
 
     private void EquipRod(string rodName, int luck, float strength)
