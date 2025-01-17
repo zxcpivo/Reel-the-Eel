@@ -40,11 +40,8 @@ public class InventoryManager : MonoBehaviour
 
         Inventory.SetActive(true);
 
-
-        // If the file doesn't exist, initialize the inventory and save it.
         if (fishInventory.Count == 0)
         {
-            Debug.Log("Initializing default inventory.");
             SaveInventory();
         }
 
@@ -181,7 +178,6 @@ public class InventoryManager : MonoBehaviour
         FishInventoryData data = new FishInventoryData { fishInventory = this.fishInventory };
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(filePath, json);
-        Debug.Log("Inventory saved to " + filePath);
     }
 
     public void LoadInventory()
@@ -191,11 +187,6 @@ public class InventoryManager : MonoBehaviour
             string json = File.ReadAllText(filePath);
             FishInventoryData data = JsonUtility.FromJson<FishInventoryData>(json);
             this.fishInventory = data.fishInventory;
-            Debug.Log("Inventory loaded from " + json);
-        }
-        else
-        {
-            Debug.LogWarning("Save file not found: " + filePath);
         }
     }
 }

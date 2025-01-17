@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
@@ -11,22 +12,39 @@ public class Shop : MonoBehaviour
     public GameObject shopObject;
     public GameObject shopCanvas;
     public GameObject sellCanvas;
+    public Text Coins;
+    public Text CoinsShop;
 
     public BoxCollider AryaCollider;
 
     private bool shopActivated;
-    private float Money;
+    private float coins;
     private string EquippedRodKey = "EquippedRod";
+    public bool isShopping = false;
+    private bool beginnerRod;
+    private bool amateurRod;
+    private bool glebRod;
 
     void Start()
     {
         LoadEquippedRod();
+        LoadCoins();
+        LoadRodPurchaseStatuses();
+        shopCanvas.SetActive(false);
+        sellCanvas.SetActive(false);
         shopObject.SetActive(false);
         AryaCollider.enabled = true;
+    }
+    void Update()
+    {
+        //print($"beginner: {beginnerRod}");
+        //print($"Amateur: {amateurRod}");
+        //print($"gleb: {glebRod}");
     }
 
     void OnMouseDown()
     {
+        isShopping = true;
         Time.timeScale = 0;
         shopActivated = true;
         shopObject.SetActive(shopActivated);
@@ -37,6 +55,7 @@ public class Shop : MonoBehaviour
 
     public void ExitShop()
     {
+        isShopping = false;
         Time.timeScale = 1;
         shopActivated = false;
         shopObject.SetActive(shopActivated);
@@ -60,92 +79,58 @@ public class Shop : MonoBehaviour
 
     public void PurchaseBeginnerRod()
     {
-        EquipRod("BeginnerRod", 50, 1f);
+        if (beginnerRod)
+            EquipRod("BeginnerRod", 50, 1f);
+        else if (coins > 100)
+        {
+            coins -= 100;
+            SaveCoins();
+            EquipRod("BeginnerRod", 50, 1f);
+            beginnerRod = true;
+            SaveRodPurchaseStatus("BeginnerRod", true);
+        }
     }
     public void PurchaseAmateurRod()
     {
-        EquipRod("AmateurRod", 25, 1.5f);
+        if (amateurRod)
+            EquipRod("AmateurRod", 25, 1.5f);
+        else if (coins > 1000)
+        {
+            coins -= 1000;
+            SaveCoins();
+            EquipRod("AmateurRod", 25, 1.5f);
+            amateurRod = true;
+            SaveRodPurchaseStatus("AmateurRod", true);
+        }
     }
     public void PurchaseRodOfGleb()
     {
-        EquipRod("RodOfGleb", 10, 2f);
+        if(glebRod)
+            EquipRod("RodOfGleb", 10, 2f);
+        else if (coins > 9999)
+        {
+            coins -= 9999;
+            SaveCoins();
+            EquipRod("RodOfGleb", 10, 2f);
+            glebRod = true;
+            SaveRodPurchaseStatus("RodOfGleb", true);
+        }
     }
 
-    public void SellCod()
+    public void Sell(string name)
     {
         for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
         {
-            if (inventoryScript.fishInventory[i].Name == "Cod")
+            if (inventoryScript.fishInventory[i].Name == name)
             {
-                Money += inventoryScript.fishInventory[i].Value;
+                coins += inventoryScript.fishInventory[i].Value;
+                Coins.text = $"{coins}";
+                CoinsShop.text = $"{coins}";
                 inventoryScript.fishInventory.RemoveAt(i);
             }
         }
         inventoryScript.SortByName();
-    }
-
-    public void SellSalmon()
-    {
-        for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
-        {
-            if (inventoryScript.fishInventory[i].Name == "Salmon")
-            {
-                Money += inventoryScript.fishInventory[i].Value;
-                inventoryScript.fishInventory.RemoveAt(i);
-            }
-        }
-        inventoryScript.SortByName();
-    }
-
-    public void SellToona()
-    {
-        for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
-        {
-            if (inventoryScript.fishInventory[i].Name == "Toona")
-            {
-                Money += inventoryScript.fishInventory[i].Value;
-                inventoryScript.fishInventory.RemoveAt(i);
-            }
-        }
-        inventoryScript.SortByName();
-    }
-
-    public void SellKoi()
-    {
-        for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
-        {
-            if (inventoryScript.fishInventory[i].Name == "Koi")
-            {
-                Money += inventoryScript.fishInventory[i].Value;
-                inventoryScript.fishInventory.RemoveAt(i);
-            }
-        }
-        inventoryScript.SortByName();
-    }
-    public void SellAngler()
-    {
-        for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
-        {
-            if (inventoryScript.fishInventory[i].Name == "Angler")
-            {
-                Money += inventoryScript.fishInventory[i].Value;
-                inventoryScript.fishInventory.RemoveAt(i);
-            }
-        }
-        inventoryScript.SortByName();
-    }
-
-    public void SellEel()
-    {
-        for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
-        {
-            if (inventoryScript.fishInventory[i].Name == "Eel")
-            {
-                Money += inventoryScript.fishInventory[i].Value;
-                inventoryScript.fishInventory.RemoveAt(i);
-            }
-        }
-        inventoryScript.SortByName();
+        SaveCoins();
     }
 
     private void EquipRod(string rodName, int luck, float strength)
@@ -153,6 +138,19 @@ public class Shop : MonoBehaviour
         gameScript.ChangeRodLuck(luck);
         fishGameScript.ChangeRodStrength(strength);
         SaveEquippedRod(rodName);
+    }
+
+    private void SaveCoins()
+    {
+        PlayerPrefs.SetFloat("Coins", coins); 
+        PlayerPrefs.Save();
+    }
+
+    private void LoadCoins()
+    {
+        coins = PlayerPrefs.GetFloat("Coins", 0f); // default to zero if not found
+        Coins.text = $"{coins}";
+        CoinsShop.text = $"{coins}";
     }
 
     private void SaveEquippedRod(string rodName)
@@ -176,6 +174,19 @@ public class Shop : MonoBehaviour
                 EquipRod("RodOfGleb", 10, 2f);
                 break;
         }
+
+    }
+    private void SaveRodPurchaseStatus(string rodName, bool isPurchased)
+    {
+        int purchaseStatus = isPurchased ? 1 : 0;
+        PlayerPrefs.SetInt(rodName, purchaseStatus);
+        PlayerPrefs.Save();
+    }
+    private void LoadRodPurchaseStatuses()
+    {
+        beginnerRod = PlayerPrefs.GetInt("BeginnerRod", 0) == 1;
+        amateurRod = PlayerPrefs.GetInt("AmateurRod", 0) == 1;
+        glebRod = PlayerPrefs.GetInt("RodOfGleb", 0) == 1;
     }
 
 }

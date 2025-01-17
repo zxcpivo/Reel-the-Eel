@@ -7,6 +7,8 @@ public class WaterDetection : MonoBehaviour
     [SerializeField] private AudioClip splashSound;
     private AudioSource audioSource;
 
+    public Shop shopScript;
+
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -25,7 +27,7 @@ public class WaterDetection : MonoBehaviour
 
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-            if (hit.collider != null && gameScript.isFishing == false)
+            if (hit.collider != null && gameScript.isFishing == false && shopScript.isShopping == false)
             {
 
                 if (hit.collider.CompareTag("Water"))
