@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[System.Serializable] // used so we can save the fish to JSON file
 public class Fish
 {
     public string Name;

@@ -5,13 +5,13 @@ public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager Instance; // Singleton instance
 
-    private bool soundOn;
-    private bool musicOn;
+    private bool _soundOn;
+    private bool _musicOn;
 
 
     void Awake()
     {
-        if (Instance == null)
+        if (Instance == null) // Makes sure that when screens change they all use the same instance
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -21,54 +21,54 @@ public class SettingsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        LoadPreferences();
+        LoadPreferences(); // load preferences when game starts
     }
 
     public void TurnSoundOn()
     {
-        soundOn = true;
-        SavePreferences();
+        _soundOn = true;
+        SavePreferences(); // save prefs
     }
 
     public void TurnSoundOff()
     {
-        soundOn = false;
-        SavePreferences();
+        _soundOn = false;
+        SavePreferences(); // save prefs
     }
 
     public bool GetSound()
     {
-        return soundOn;
+        return _soundOn;
     }
 
     public void TurnMusicOn()
     {
-        musicOn = true;
-        SavePreferences();
+        _musicOn = true;
+        SavePreferences(); // save prefs
     }
 
     public void TurnMusicOff()
     {
-        musicOn = false;
-        SavePreferences();
+        _musicOn = false;
+        SavePreferences(); // save prefs
     }
 
     public bool GetMusic()
     {
-        return musicOn;
+        return _musicOn;
     }
 
     private void SavePreferences()
     {
-        PlayerPrefs.SetInt("SoundOn", soundOn ? 1 : 0);
-        PlayerPrefs.SetInt("MusicOn", musicOn ? 1 : 0);
+        PlayerPrefs.SetInt("SoundOn", _soundOn ? 1 : 0); // checks is _soundOn is 1 or 0
+        PlayerPrefs.SetInt("MusicOn", _musicOn ? 1 : 0); // 1 is true 0 is false
         PlayerPrefs.Save();
     }
 
     private void LoadPreferences()
     {
-        soundOn = PlayerPrefs.GetInt("SoundOn", 1) == 1;
-        musicOn = PlayerPrefs.GetInt("MusicOn", 1) == 1;
+        _soundOn = PlayerPrefs.GetInt("SoundOn", 1) == 1; // if their true it sets to true
+        _musicOn = PlayerPrefs.GetInt("MusicOn", 1) == 1; // if they dont equal 1(true) then go to default value which is false
     }
 }
 

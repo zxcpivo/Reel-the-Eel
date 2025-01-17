@@ -50,8 +50,6 @@ public class InventoryManager : MonoBehaviour
         }
 
         StartCoroutine(DelayedSort());
-
-        //searchInputField.onValueChanged.AddListener(OnSearchChanged);
     }
 
     private IEnumerator DelayedSort()
@@ -136,23 +134,23 @@ public class InventoryManager : MonoBehaviour
 
     public void SortByName()
     {
-        InitializeInventory();
+        InitializeInventory(); // clears inventory
         List<Fish>[] pigeonholes = new List<Fish>[26];
-        for (int i = 0; i < 26; i++)
+        for (int i = 0; i < 26; i++) // initializes all the buckets
         {
             pigeonholes[i] = new List<Fish>();
         }
         foreach (Fish fish in fishInventory)
         {
-            char firstLetter = char.ToLower(fish.Name[0]);
-            int index = firstLetter - 'a';
-            pigeonholes[index].Add(fish);
+            char firstLetter = char.ToLower(fish.Name[0]); // takes first letter of every fish name and sets it to lower checking for which bucket it needs to go to
+            int index = firstLetter - 'a'; // figures out which index the bucket is using ASCII value of 'a' from the ASCII value of the first letter
+            pigeonholes[index].Add(fish); // adds fish to the bucket
         }
 
-        fishInventory.Clear();
+        fishInventory.Clear(); // clears the inventory to reorganize
         foreach (List<Fish> bucket in pigeonholes)
         {
-            foreach (Fish fish in bucket)
+            foreach (Fish fish in bucket) // redistributes all the fish inside each bucket back to int inventory
             {
                 if (fish.Name == "Cod")
                     AddFishToInventory(fish, codSprite);
@@ -172,39 +170,28 @@ public class InventoryManager : MonoBehaviour
 
     public void OnSearchChanged(string searchText)
     {
-        // Clear the filtered inventory list
-        filteredFishInventory.Clear();
-        //PrintList();
-        //print("hello");
-
-        // Manual linear search through the fishInventory
+        filteredFishInventory.Clear(); // clears the other list
         for (int i = 0; i < fishInventory.Count; i++)
         {
-            // Check if the fish's name contains the search text (case insensitive)
-            if (fishInventory[i].Name.ToLower().Contains(searchText.ToLower()))
+            if (fishInventory[i].Name.ToLower().Contains(searchText.ToLower())) // Converts the fish's name and the text inputed in serach bar to lowercase for case-insensitive comparison. Contain() checks if any letters are similar
             {
-                // Add the matching fish to the filtered list
-                filteredFishInventory.Add(fishInventory[i]);
+                filteredFishInventory.Add(fishInventory[i]); // add to the new filtered list
             }
         }
 
-        if (string.IsNullOrWhiteSpace(searchText))
+        if (string.IsNullOrWhiteSpace(searchText)) // if they enter nothing
         {
-            print("empty");
-
-            SortByName();
+            SortByName(); // display the full inventory
         }
         else
         {
-            // Update the inventory display with the filtered results
-            UpdateInventoryDisplay(filteredFishInventory);
+            UpdateInventoryDisplay(filteredFishInventory); // update the ui to display the inventory
         }
     }
 
-    // Updates the inventory display to show filtered items
-    private void UpdateInventoryDisplay(List<Fish> fishList)
+    private void UpdateInventoryDisplay(List<Fish> fishList) // simply updates the display of the fish
     {
-        InitializeInventory();
+        InitializeInventory(); // initialize list
 
         foreach (var fish in fishList)
         {

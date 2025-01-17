@@ -17,51 +17,48 @@ public class Shop : MonoBehaviour
 
     public BoxCollider AryaCollider;
 
-    private bool shopActivated;
-    private float coins;
-    private string EquippedRodKey = "EquippedRod";
-    public bool isShopping = false;
-    private bool beginnerRod;
-    private bool amateurRod;
-    private bool glebRod;
+    private bool _shopActivated;
+    private float _coins;
+    private string _EquippedRodKey = "EquippedRod"; // name of the rod equiped
+
+    public bool isShopping = false; // public since unity inspector needs access to it
+
+    private bool _beginnerRod;
+    private bool _amateurRod;
+    private bool _glebRod;
 
     void Start()
     {
-        LoadEquippedRod();
+        LoadEquippedRod(); // load everything
         LoadCoins();
         LoadRodPurchaseStatuses();
-        shopCanvas.SetActive(false);
+
+        shopCanvas.SetActive(false); // close the shop on start
         sellCanvas.SetActive(false);
         shopObject.SetActive(false);
-        AryaCollider.enabled = true;
-    }
-    void Update()
-    {
-        //print($"beginner: {beginnerRod}");
-        //print($"Amateur: {amateurRod}");
-        //print($"gleb: {glebRod}");
+        AryaCollider.enabled = true; // enable the collider to get ready to detect clicks
     }
 
     void OnMouseDown()
     {
         isShopping = true;
-        Time.timeScale = 0;
-        shopActivated = true;
-        shopObject.SetActive(shopActivated);
+        Time.timeScale = 0; // pauses game background
+        _shopActivated = true;
+        shopObject.SetActive(true); // turns the shop on
         shopCanvas.SetActive(true);
         sellCanvas.SetActive(false);
-        AryaCollider.enabled = false;
+        AryaCollider.enabled = false; // disables so you cant open the shop twice
     }
 
     public void ExitShop()
     {
         isShopping = false;
-        Time.timeScale = 1;
-        shopActivated = false;
-        shopObject.SetActive(shopActivated);
+        Time.timeScale = 1; // resumes game
+        _shopActivated = false;
+        shopObject.SetActive(false); // turns shop off
         shopCanvas.SetActive(false);
         sellCanvas.SetActive(false);
-        AryaCollider.enabled = true;
+        AryaCollider.enabled = true; // enables the collider again
     }
 
     public void EnterSell()
@@ -79,40 +76,40 @@ public class Shop : MonoBehaviour
 
     public void PurchaseBeginnerRod()
     {
-        if (beginnerRod)
+        if (_beginnerRod) // if they already purchased it
             EquipRod("BeginnerRod", 50, 1f);
-        else if (coins > 100)
+        else if (_coins > 100)
         {
-            coins -= 100;
+            _coins -= 100;
             SaveCoins();
             EquipRod("BeginnerRod", 50, 1f);
-            beginnerRod = true;
+            _beginnerRod = true;
             SaveRodPurchaseStatus("BeginnerRod", true);
         }
     }
     public void PurchaseAmateurRod()
     {
-        if (amateurRod)
+        if (_amateurRod) // if they already purchased it
             EquipRod("AmateurRod", 25, 1.5f);
-        else if (coins > 1000)
+        else if (_coins > 1000)
         {
-            coins -= 1000;
+            _coins -= 1000;
             SaveCoins();
             EquipRod("AmateurRod", 25, 1.5f);
-            amateurRod = true;
+            _amateurRod = true;
             SaveRodPurchaseStatus("AmateurRod", true);
         }
     }
     public void PurchaseRodOfGleb()
     {
-        if(glebRod)
+        if(_glebRod) // if they already purchased it
             EquipRod("RodOfGleb", 10, 2f);
-        else if (coins > 9999)
+        else if (_coins > 9999)
         {
-            coins -= 9999;
+            _coins -= 9999;
             SaveCoins();
             EquipRod("RodOfGleb", 10, 2f);
-            glebRod = true;
+            _glebRod = true;
             SaveRodPurchaseStatus("RodOfGleb", true);
         }
     }
@@ -121,50 +118,50 @@ public class Shop : MonoBehaviour
     {
         for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
         {
-            if (inventoryScript.fishInventory[i].Name == name)
+            if (inventoryScript.fishInventory[i].Name == name) // goes through the fish inventory and every time it spots a fish with the same name as the one you want to sell it sells it
             {
-                coins += inventoryScript.fishInventory[i].Value;
-                Coins.text = $"{coins}";
-                CoinsShop.text = $"{coins}";
+                _coins += inventoryScript.fishInventory[i].Value;
+                Coins.text = $"{_coins}"; // update coins for both sell and buy screen
+                CoinsShop.text = $"{_coins}";
                 inventoryScript.fishInventory.RemoveAt(i);
             }
         }
-        inventoryScript.SortByName();
+        inventoryScript.SortByName(); // sort the inventory
         SaveCoins();
     }
 
     private void EquipRod(string rodName, int luck, float strength)
     {
-        gameScript.ChangeRodLuck(luck);
-        fishGameScript.ChangeRodStrength(strength);
+        gameScript.ChangeRodLuck(luck); // changes the rods luck to reel fish faster
+        fishGameScript.ChangeRodStrength(strength); // changed the rod to hold onto the fish better so they dont move around during the minigame
         SaveEquippedRod(rodName);
     }
 
     private void SaveCoins()
     {
-        PlayerPrefs.SetFloat("Coins", coins); 
+        PlayerPrefs.SetFloat("Coins", _coins); 
         PlayerPrefs.Save();
     }
 
     private void LoadCoins()
     {
-        coins = PlayerPrefs.GetFloat("Coins", 0f); // default to zero if not found
-        Coins.text = $"{coins}";
-        CoinsShop.text = $"{coins}";
+        _coins = PlayerPrefs.GetFloat("Coins", 0f); // default to zero if not found
+        Coins.text = $"{_coins}";
+        CoinsShop.text = $"{_coins}";
     }
 
     private void SaveEquippedRod(string rodName)
     {
-        PlayerPrefs.SetString(EquippedRodKey, rodName);
+        PlayerPrefs.SetString(_EquippedRodKey, rodName);
         PlayerPrefs.Save();
     }
 
     private void LoadEquippedRod()
     {
-        string rodName = PlayerPrefs.GetString(EquippedRodKey, "BeginnerRod"); // Default to BeginnerRod
+        string rodName = PlayerPrefs.GetString(_EquippedRodKey, "BeginnerRod"); // Default to BeginnerRod
         switch (rodName) // tests every case
         {
-            case "BeginnerRod": // not necessary as if other 2 cases fail its already default to beginner rod but looks nicer in code
+            case "BeginnerRod":
                 EquipRod("BeginnerRod", 50, 1f);
                 break;
             case "AmateurRod":
@@ -184,9 +181,9 @@ public class Shop : MonoBehaviour
     }
     private void LoadRodPurchaseStatuses()
     {
-        beginnerRod = PlayerPrefs.GetInt("BeginnerRod", 0) == 1;
-        amateurRod = PlayerPrefs.GetInt("AmateurRod", 0) == 1;
-        glebRod = PlayerPrefs.GetInt("RodOfGleb", 0) == 1;
+        _beginnerRod = PlayerPrefs.GetInt("BeginnerRod", 0) == 1;
+        _amateurRod = PlayerPrefs.GetInt("AmateurRod", 0) == 1;
+        _glebRod = PlayerPrefs.GetInt("RodOfGleb", 0) == 1;
     }
 
 }
