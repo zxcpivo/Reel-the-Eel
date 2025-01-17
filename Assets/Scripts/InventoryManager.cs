@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class FishInventoryData
@@ -31,6 +32,9 @@ public class InventoryManager : MonoBehaviour
 
     private string filePath;
 
+    public InputField searchInputField; // Reference to the search bar input field
+    private List<Fish> filteredFishInventory = new List<Fish>(); // Filtered fish list
+
     void Start()
     {
 
@@ -46,13 +50,14 @@ public class InventoryManager : MonoBehaviour
         }
 
         StartCoroutine(DelayedSort());
+
+        //searchInputField.onValueChanged.AddListener(OnSearchChanged);
     }
 
     private IEnumerator DelayedSort()
     {
         yield return new WaitForSeconds(0.1f);
         SortByName();
-        PrintList();
         Inventory.SetActive(false);
     }
 
@@ -162,6 +167,66 @@ public class InventoryManager : MonoBehaviour
                 else if (fish.Name == "Eel")
                     AddFishToInventory(fish, eelSprite);
             }
+        }
+    }
+
+    public void OnSearchChanged(string searchText)
+    {
+        // Clear the filtered inventory list
+        filteredFishInventory.Clear();
+        //PrintList();
+        //print("hello");
+
+        // Manual linear search through the fishInventory
+        for (int i = 0; i < fishInventory.Count; i++)
+        {
+            // Check if the fish's name contains the search text (case insensitive)
+            if (fishInventory[i].Name.ToLower().Contains(searchText.ToLower()))
+            {
+                // Add the matching fish to the filtered list
+                filteredFishInventory.Add(fishInventory[i]);
+            }
+        }
+
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            print("empty");
+
+            SortByName();
+        }
+        else
+        {
+            // Update the inventory display with the filtered results
+            UpdateInventoryDisplay(filteredFishInventory);
+        }
+    }
+
+    // Updates the inventory display to show filtered items
+    private void UpdateInventoryDisplay(List<Fish> fishList)
+    {
+        InitializeInventory();
+
+        foreach (var fish in fishList)
+        {
+            Sprite sprite = GetFishSprite(fish.Name);
+            if (sprite != null)
+            {
+                AddItem(fish.Name, fish.Weight, fish.Quantity, sprite, "Caught Fish");
+            }
+        }
+    }
+
+    private Sprite GetFishSprite(string fishName)
+    {
+        switch (fishName)
+        {
+            case "Cod": return codSprite;
+            case "Salmon": return salmonSprite;
+            case "Toona": return toonaSprite;
+            case "Koi": return koiSprite;
+            case "Angler": return anglerSprite;
+            case "Eel": return eelSprite;
+            default: return null;
         }
     }
 
