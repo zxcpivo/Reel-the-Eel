@@ -167,6 +167,22 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    public void SortByValue()
+    {
+        InitializeInventory();
+
+        
+        fishInventory.Sort((fish1, fish2) => fish2.Value.CompareTo(fish1.Value));
+
+        foreach (var fish in fishInventory)
+        {
+            Sprite sprite = GetFishSprite(fish.Name);
+            if (sprite != null)
+            {
+                AddItem(fish.Name, fish.Weight, fish.Quantity, sprite, "Caught Fish");
+            }
+        }
+    }
 
     public void OnSearchChanged(string searchText)
     {
