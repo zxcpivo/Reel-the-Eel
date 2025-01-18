@@ -183,6 +183,22 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    public void SortByNameDescending()
+    {
+        InitializeInventory();
+
+        // Sort by name in descending order
+        fishInventory.Sort((fish1, fish2) => fish2.Name.CompareTo(fish1.Name));
+
+        foreach (var fish in fishInventory)
+        {
+            Sprite sprite = GetFishSprite(fish.Name);
+            if (sprite != null)
+            {
+                AddItem(fish.Name, fish.Weight, fish.Quantity, sprite, "Caught Fish");
+            }
+        }
+    }
 
     public void OnSearchChanged(string searchText)
     {
