@@ -169,20 +169,48 @@ public class InventoryManager : MonoBehaviour
     }
     public void SortByValue()
     {
-        InitializeInventory();
+        // Find the min and max values of all the fish to determine pigeonhole range
+        float minValue = float.MaxValue;
+        float maxValue = float.MinValue;
 
-        
-        fishInventory.Sort((fish1, fish2) => fish2.Value.CompareTo(fish1.Value));
-
-        foreach (var fish in fishInventory)
+        foreach (Fish fish in fishInventory)
         {
-            Sprite sprite = GetFishSprite(fish.Name);
-            if (sprite != null)
+            if (fish.Value < minValue) minValue = fish.Value;
+            if (fish.Value > maxValue) maxValue = fish.Value;
+        }
+
+        // Define pigeonholes based on the value range (we assume values are rounded to integers)
+        int range = (int)(maxValue - minValue) + 1;  // Range is the difference between max and min value
+        List<Fish>[] pigeonholes = new List<Fish>[range];
+
+        // Initialize pigeonholes
+        for (int i = 0; i < range; i++)
+        {
+            pigeonholes[i] = new List<Fish>();
+        }
+
+        // Distribute the fish into pigeonholes based on their value
+        foreach (Fish fish in fishInventory)
+        {
+            int index = Mathf.FloorToInt(fish.Value - minValue); // Normalize value to pigeonhole index
+            pigeonholes[index].Add(fish);
+        }
+
+        fishInventory.Clear(); // clears the inventory to reorganize
+
+        // Add fish back to the inventory, in descending order of value (from maxValue to minValue)
+        for (int i = range - 1; i >= 0; i--) // Loop from max value index to min value index
+        {
+            foreach (Fish fish in pigeonholes[i])
             {
-                AddItem(fish.Name, fish.Weight, fish.Quantity, sprite, "Caught Fish");
+                fishInventory.Add(fish); // Re-add the fish to the main inventory
             }
         }
+
+        // Update the UI with the sorted fish
+        UpdateInventoryDisplay(fishInventory);
     }
+
     public void SortByNameDescending()
     {
         InitializeInventory(); // clears inventory
