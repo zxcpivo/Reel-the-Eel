@@ -185,21 +185,39 @@ public class InventoryManager : MonoBehaviour
     }
     public void SortByNameDescending()
     {
-        InitializeInventory();
-
-        // Sort by name in descending order
-        fishInventory.Sort((fish1, fish2) => fish2.Name.CompareTo(fish1.Name));
-
-        foreach (var fish in fishInventory)
+        InitializeInventory(); // clears inventory
+        List<Fish>[] pigeonholes = new List<Fish>[26];
+        for (int i = 0; i < 26; i++) // initializes all the buckets
         {
-            Sprite sprite = GetFishSprite(fish.Name);
-            if (sprite != null)
+            pigeonholes[i] = new List<Fish>();
+        }
+        foreach (Fish fish in fishInventory)
+        {
+            char firstLetter = char.ToLower(fish.Name[0]); // takes first letter of every fish name and sets it to lower checking for which bucket it needs to go to
+            int index = -(firstLetter - 'z'); // figures out which index the bucket is using ASCII value of 'a' from the ASCII value of the first letter
+            pigeonholes[index].Add(fish); // adds fish to the bucket
+        }
+
+        fishInventory.Clear(); // clears the inventory to reorganize
+        foreach (List<Fish> bucket in pigeonholes)
+        {
+            foreach (Fish fish in bucket) // redistributes all the fish inside each bucket back to int inventory
             {
-                AddItem(fish.Name, fish.Weight, fish.Quantity, sprite, "Caught Fish");
+                if (fish.Name == "Cod")
+                    AddFishToInventory(fish, codSprite);
+                else if (fish.Name == "Salmon")
+                    AddFishToInventory(fish, salmonSprite);
+                else if (fish.Name == "Toona")
+                    AddFishToInventory(fish, toonaSprite);
+                else if (fish.Name == "Koi")
+                    AddFishToInventory(fish, koiSprite);
+                else if (fish.Name == "Angler")
+                    AddFishToInventory(fish, anglerSprite);
+                else if (fish.Name == "Eel")
+                    AddFishToInventory(fish, eelSprite);
             }
         }
     }
-
     public void SortByWeightAndValue()
     {
         InitializeInventory(); 
