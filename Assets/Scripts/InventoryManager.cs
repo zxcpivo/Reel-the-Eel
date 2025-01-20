@@ -200,6 +200,36 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void SortByWeightAndValue()
+    {
+        InitializeInventory(); 
+
+        for (int i = 0; i < fishInventory.Count - 1; i++)
+        {
+            for (int j = 0; j < fishInventory.Count - i - 1; j++)
+            {
+                Fish fish1 = fishInventory[j];
+                Fish fish2 = fishInventory[j + 1];
+
+                if (fish1.Weight < fish2.Weight ||
+                    (fish1.Weight == fish2.Weight && fish1.Value < fish2.Value)) 
+                {
+                    fishInventory[j] = fish2;
+                    fishInventory[j + 1] = fish1;
+                }
+            }
+        }
+
+        foreach (var fish in fishInventory)
+        {
+            Sprite sprite = GetFishSprite(fish.Name);
+            if (sprite != null)
+            {
+                AddItem(fish.Name, fish.Weight, fish.Quantity, sprite, "Caught Fish");
+            }
+        }
+    }
+
     public void OnSearchChanged(string searchText)
     {
         filteredFishInventory.Clear(); // clears the other list
