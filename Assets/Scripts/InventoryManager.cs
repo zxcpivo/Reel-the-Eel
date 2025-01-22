@@ -12,39 +12,39 @@ public class FishInventoryData
 
 public class InventoryManager : MonoBehaviour
 {
-    public List<Fish> fishInventory = new List<Fish>();
+    public List<Fish> FishInventory = new List<Fish>();
     public GameObject Inventory;
     public GameObject InventoryMenu;
     public GameObject InventoryCanvas;
-    private bool menuActivated;
-    public ItemSlot[] itemSlot;
+    private bool _menuActivated;
+    public ItemSlot[] ItemSlot;
 
-    private ItemSlot currentlySelectedSlot;
-    private CharacterController2D Controller;
-    public GameManager gameManager;
+    private ItemSlot _currentlySelectedSlot;
+    private CharacterController2D _controller;
+    public GameManager GameManager;
 
-    public Sprite codSprite;
-    public Sprite salmonSprite;
-    public Sprite toonaSprite;
-    public Sprite koiSprite;
-    public Sprite anglerSprite;
-    public Sprite eelSprite;
+    public Sprite CodSprite;
+    public Sprite SalmonSprite;
+    public Sprite ToonaSprite;
+    public Sprite KoiSprite;
+    public Sprite AnglerSprite;
+    public Sprite EelSprite;
 
-    private string filePath;
+    private string _filePath;
 
-    public InputField searchInputField; // Reference to the search bar input field
-    private List<Fish> filteredFishInventory = new List<Fish>(); // Filtered fish list
+    public InputField SearchInputField; // Reference to the search bar input field
+    private List<Fish> _filteredFishInventory = new List<Fish>(); // Filtered fish list
 
     void Start()
     {
 
-        Controller = FindObjectOfType<CharacterController2D>();
-        filePath = Path.Combine(Application.persistentDataPath, "fishInventory.json");
+        _controller = FindObjectOfType<CharacterController2D>();
+        _filePath = Path.Combine(Application.persistentDataPath, "fishInventory.json");
         LoadInventory();
 
         Inventory.SetActive(true);
 
-        if (fishInventory.Count == 0)
+        if (FishInventory.Count == 0)
         {
             SaveInventory();
         }
@@ -62,7 +62,7 @@ public class InventoryManager : MonoBehaviour
 
     public void InitializeInventory()
     {
-        foreach (var slot in itemSlot)
+        foreach (var slot in ItemSlot)
         {
             if (slot != null)
             {
@@ -74,32 +74,32 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Inventory") && menuActivated)
+        if (Input.GetButtonDown("Inventory") && _menuActivated)
         {
             Time.timeScale = 1;
             Inventory.SetActive(false);
             InventoryCanvas.SetActive(false);
-            Controller.CloseInventory();
-            menuActivated = false;
+            _controller.CloseInventory();
+            _menuActivated = false;
         }
-        else if (Input.GetButtonDown("Inventory") && !menuActivated)
+        else if (Input.GetButtonDown("Inventory") && !_menuActivated)
         {
             Time.timeScale = 0;
             Inventory.SetActive(true);
             InventoryCanvas.SetActive(true);
-            Controller.OpenInventory();
-            menuActivated = true;
+            _controller.OpenInventory();
+            _menuActivated = true;
         }
     }
 
     public int AddItem(string itemName, int weight, int quantity, Sprite itemSprite, string itemDescription)
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        for (int i = 0; i < ItemSlot.Length; i++)
         {
-            if (!itemSlot[i].isFull)  // Find an empty slot
+            if (!ItemSlot[i].isFull)  // Find an empty slot
             {
                 // Add the item to this slot
-                itemSlot[i].AddItem(itemName, weight, 1, itemSprite, itemDescription); // Only add one item at a time
+                ItemSlot[i].AddItem(itemName, weight, 1, itemSprite, itemDescription); // Only add one item at a time
                 return 0; // No leftover items
             }
         }
@@ -115,21 +115,21 @@ public class InventoryManager : MonoBehaviour
 
     public void AddFishToInventory(Fish fish, Sprite fishSprite)
     {
-        fishInventory.Add(fish);
+        FishInventory.Add(fish);
         AddItem(fish.Name, fish.Weight, fish.Quantity, fishSprite, "Caught Sprite");
     }
 
     public void SelectSlot(ItemSlot slot)
     {
-        if (currentlySelectedSlot != null)
+        if (_currentlySelectedSlot != null)
         {
-            currentlySelectedSlot.selectedShader.SetActive(false);
-            currentlySelectedSlot.thisItemSelected = false;
+            _currentlySelectedSlot.selectedShader.SetActive(false);
+            _currentlySelectedSlot.thisItemSelected = false;
         }
 
-        currentlySelectedSlot = slot;
-        currentlySelectedSlot.selectedShader.SetActive(true);
-        currentlySelectedSlot.thisItemSelected = true;
+        _currentlySelectedSlot = slot;
+        _currentlySelectedSlot.selectedShader.SetActive(true);
+        _currentlySelectedSlot.thisItemSelected = true;
     }
 
     public void SortByName()
@@ -140,30 +140,30 @@ public class InventoryManager : MonoBehaviour
         {
             pigeonholes[i] = new List<Fish>();
         }
-        foreach (Fish fish in fishInventory)
+        foreach (Fish fish in FishInventory)
         {
             char firstLetter = char.ToLower(fish.Name[0]); // takes first letter of every fish name and sets it to lower checking for which bucket it needs to go to
             int index = firstLetter - 'a'; // figures out which index the bucket is using ASCII value of 'a' from the ASCII value of the first letter
             pigeonholes[index].Add(fish); // adds fish to the bucket
         }
 
-        fishInventory.Clear(); // clears the inventory to reorganize
+        FishInventory.Clear(); // clears the inventory to reorganize
         foreach (List<Fish> bucket in pigeonholes)
         {
             foreach (Fish fish in bucket) // redistributes all the fish inside each bucket back to int inventory
             {
                 if (fish.Name == "Cod")
-                    AddFishToInventory(fish, codSprite);
+                    AddFishToInventory(fish, CodSprite);
                 else if (fish.Name == "Salmon")
-                    AddFishToInventory(fish, salmonSprite);
+                    AddFishToInventory(fish, SalmonSprite);
                 else if (fish.Name == "Toona")
-                    AddFishToInventory(fish, toonaSprite);
+                    AddFishToInventory(fish, ToonaSprite);
                 else if (fish.Name == "Koi")
-                    AddFishToInventory(fish, koiSprite);
+                    AddFishToInventory(fish, KoiSprite);
                 else if (fish.Name == "Angler")
-                    AddFishToInventory(fish, anglerSprite);
+                    AddFishToInventory(fish, AnglerSprite);
                 else if (fish.Name == "Eel")
-                    AddFishToInventory(fish, eelSprite);
+                    AddFishToInventory(fish, EelSprite);
             }
         }
     }
@@ -173,7 +173,7 @@ public class InventoryManager : MonoBehaviour
         float minValue = float.MaxValue;
         float maxValue = float.MinValue;
 
-        foreach (Fish fish in fishInventory)
+        foreach (Fish fish in FishInventory)
         {
             if (fish.Value < minValue) minValue = fish.Value;
             if (fish.Value > maxValue) maxValue = fish.Value;
@@ -190,25 +190,25 @@ public class InventoryManager : MonoBehaviour
         }
 
         // Distribute the fish into pigeonholes based on their value
-        foreach (Fish fish in fishInventory)
+        foreach (Fish fish in FishInventory)
         {
             int index = Mathf.FloorToInt(fish.Value - minValue); // Normalize value to pigeonhole index
             pigeonholes[index].Add(fish);
         }
 
-        fishInventory.Clear(); // clears the inventory to reorganize
+        FishInventory.Clear(); // clears the inventory to reorganize
 
         // Add fish back to the inventory, in descending order of value (from maxValue to minValue)
         for (int i = range - 1; i >= 0; i--) // Loop from max value index to min value index
         {
             foreach (Fish fish in pigeonholes[i])
             {
-                fishInventory.Add(fish); // Re-add the fish to the main inventory
+                FishInventory.Add(fish); // Re-add the fish to the main inventory
             }
         }
 
         // Update the UI with the sorted fish
-        UpdateInventoryDisplay(fishInventory);
+        UpdateInventoryDisplay(FishInventory);
     }
 
     public void SortByNameDescending()
@@ -219,30 +219,30 @@ public class InventoryManager : MonoBehaviour
         {
             pigeonholes[i] = new List<Fish>();
         }
-        foreach (Fish fish in fishInventory)
+        foreach (Fish fish in FishInventory)
         {
             char firstLetter = char.ToLower(fish.Name[0]); // takes first letter of every fish name and sets it to lower checking for which bucket it needs to go to
             int index = -(firstLetter - 'z'); // figures out which index the bucket is using ASCII value of 'a' from the ASCII value of the first letter
             pigeonholes[index].Add(fish); // adds fish to the bucket
         }
 
-        fishInventory.Clear(); // clears the inventory to reorganize
+        FishInventory.Clear(); // clears the inventory to reorganize
         foreach (List<Fish> bucket in pigeonholes)
         {
             foreach (Fish fish in bucket) // redistributes all the fish inside each bucket back to int inventory
             {
                 if (fish.Name == "Cod")
-                    AddFishToInventory(fish, codSprite);
+                    AddFishToInventory(fish, CodSprite);
                 else if (fish.Name == "Salmon")
-                    AddFishToInventory(fish, salmonSprite);
+                    AddFishToInventory(fish, SalmonSprite);
                 else if (fish.Name == "Toona")
-                    AddFishToInventory(fish, toonaSprite);
+                    AddFishToInventory(fish, ToonaSprite);
                 else if (fish.Name == "Koi")
-                    AddFishToInventory(fish, koiSprite);
+                    AddFishToInventory(fish, KoiSprite);
                 else if (fish.Name == "Angler")
-                    AddFishToInventory(fish, anglerSprite);
+                    AddFishToInventory(fish, AnglerSprite);
                 else if (fish.Name == "Eel")
-                    AddFishToInventory(fish, eelSprite);
+                    AddFishToInventory(fish, EelSprite);
             }
         }
     }
@@ -250,23 +250,23 @@ public class InventoryManager : MonoBehaviour
     {
         InitializeInventory(); 
 
-        for (int i = 0; i < fishInventory.Count - 1; i++)
+        for (int i = 0; i < FishInventory.Count - 1; i++)
         {
-            for (int j = 0; j < fishInventory.Count - i - 1; j++)
+            for (int j = 0; j < FishInventory.Count - i - 1; j++)
             {
-                Fish fish1 = fishInventory[j];
-                Fish fish2 = fishInventory[j + 1];
+                Fish fish1 = FishInventory[j];
+                Fish fish2 = FishInventory[j + 1];
 
                 if (fish1.Weight < fish2.Weight ||
                     (fish1.Weight == fish2.Weight && fish1.Value < fish2.Value)) 
                 {
-                    fishInventory[j] = fish2;
-                    fishInventory[j + 1] = fish1;
+                    FishInventory[j] = fish2;
+                    FishInventory[j + 1] = fish1;
                 }
             }
         }
 
-        foreach (var fish in fishInventory)
+        foreach (var fish in FishInventory)
         {
             Sprite sprite = GetFishSprite(fish.Name);
             if (sprite != null)
@@ -277,34 +277,34 @@ public class InventoryManager : MonoBehaviour
     }
     public void SearchByColor(string searchColor) //gleb
     {
-        filteredFishInventory.Clear();
+        _filteredFishInventory.Clear();
 
-        foreach (Fish fish in fishInventory)
+        foreach (Fish fish in FishInventory)
         {
             if (fish.Color.ToLower() == searchColor.ToLower()) 
             {
-                filteredFishInventory.Add(fish); 
+                _filteredFishInventory.Add(fish); 
             }
         }
 
-        if (string.IsNullOrWhiteSpace(searchColor))
+        if (string.IsNullOrWhiteSpace(searchColor)) // found IsNullOrWhiteSpace method being mentioned on stack overflow
         {
             SortByName(); 
-        }
+        }   
         else
         {
-            UpdateInventoryDisplay(filteredFishInventory); 
+            UpdateInventoryDisplay(_filteredFishInventory); 
         }
     }
 
     public void OnSearchChanged(string searchText)
     {
-        filteredFishInventory.Clear(); // clears the other list
-        for (int i = 0; i < fishInventory.Count; i++)
+        _filteredFishInventory.Clear(); // clears the other list
+        for (int i = 0; i < FishInventory.Count; i++)
         {
-            if (fishInventory[i].Name.ToLower().Contains(searchText.ToLower())) // Converts the fish's name and the text inputed in serach bar to lowercase for case-insensitive comparison. Contain() checks if any letters are similar
+            if (FishInventory[i].Name.ToLower().Contains(searchText.ToLower())) // Converts the fish's name and the text inputed in serach bar to lowercase for case-insensitive comparison. Contain() checks if any letters are similar
             {
-                filteredFishInventory.Add(fishInventory[i]); // add to the new filtered list
+                _filteredFishInventory.Add(FishInventory[i]); // add to the new filtered list
             }
         }
 
@@ -314,7 +314,7 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            UpdateInventoryDisplay(filteredFishInventory); // update the ui to display the inventory
+            UpdateInventoryDisplay(_filteredFishInventory); // update the ui to display the inventory
         }
     }
 
@@ -336,19 +336,19 @@ public class InventoryManager : MonoBehaviour
     {
         switch (fishName)
         {
-            case "Cod": return codSprite;
-            case "Salmon": return salmonSprite;
-            case "Toona": return toonaSprite;
-            case "Koi": return koiSprite;
-            case "Angler": return anglerSprite;
-            case "Eel": return eelSprite;
+            case "Cod": return CodSprite;
+            case "Salmon": return SalmonSprite;
+            case "Toona": return ToonaSprite;
+            case "Koi": return KoiSprite;
+            case "Angler": return AnglerSprite;
+            case "Eel": return EelSprite;
             default: return null;
         }
     }
 
     public void PrintList()
     {
-        foreach (Fish fish in fishInventory)
+        foreach (Fish fish in FishInventory)
         {
             print($"{fish.Name}, {fish.Weight}");
         }
@@ -356,18 +356,18 @@ public class InventoryManager : MonoBehaviour
 
     public void SaveInventory()
     {
-        FishInventoryData data = new FishInventoryData { fishInventory = this.fishInventory };
+        FishInventoryData data = new FishInventoryData { fishInventory = this.FishInventory };
         string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(filePath, json);
+        File.WriteAllText(_filePath, json);
     }
 
     public void LoadInventory()
     {
-        if (File.Exists(filePath))
+        if (File.Exists(_filePath))
         {
-            string json = File.ReadAllText(filePath);
+            string json = File.ReadAllText(_filePath);
             FishInventoryData data = JsonUtility.FromJson<FishInventoryData>(json);
-            this.fishInventory = data.fishInventory;
+            this.FishInventory = data.fishInventory;
         }
     }
 }

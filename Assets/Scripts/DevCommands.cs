@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DevCommandsManager : MonoBehaviour
 {
-    public GameManager gameManager;
+    public GameManager GameManager;
 
     void Update()
     {
@@ -46,7 +46,7 @@ public class DevCommandsManager : MonoBehaviour
     private void SpawnSpecificFish(string fishName)
     {
         Debug.Log($"spawning {fishName}");
-        gameManager.CatchFish(fishName);
+        GameManager.CatchFish(fishName);
     }
 
     private void SpawnRandomFish()
@@ -68,6 +68,6 @@ public class DevCommandsManager : MonoBehaviour
         else
             randomFish = "eel";
 
-        gameManager.CatchFish(randomFish);
+        GameManager.CatchFish(randomFish);
     }
 }
