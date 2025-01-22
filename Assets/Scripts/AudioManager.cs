@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioClip[] footSteps;
-    private AudioSource source;
-    private bool isWalking = false; 
-    public float stepInterval = 0.5f;
+    public AudioClip[] FootSteps;
+    private AudioSource _source;
+    private bool _isWalking = false; 
+    public float StepInterval = 0.5f;
 
     public static AudioManager Instance; // Singleton instance
 
@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        source = GetComponent<AudioSource>();
+        _source = GetComponent<AudioSource>();
 
         if (SettingsManager.Instance == null)
         {
@@ -39,25 +39,25 @@ public class AudioManager : MonoBehaviour
 
     public void StartFootsteps()
     {
-        if (!isWalking)
+        if (!_isWalking)
         {
-            isWalking = true;
+            _isWalking = true;
             StartCoroutine(PlayFootsteps());
         }
     }
 
     public void StopFootsteps()
     {
-        isWalking = false;
+        _isWalking = false;
     }
 
     private IEnumerator PlayFootsteps()
     {
-        while (isWalking && SettingsManager.Instance.GetSound())
+        while (_isWalking && SettingsManager.Instance.GetSound())
         {
-            AudioClip clip = footSteps[Random.Range(0, footSteps.Length)];
-            source.PlayOneShot(clip);
-            yield return new WaitForSeconds(stepInterval);
+            AudioClip clip = FootSteps[Random.Range(0, FootSteps.Length)];
+            _source.PlayOneShot(clip);
+            yield return new WaitForSeconds(StepInterval);
         }
     }
 }

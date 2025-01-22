@@ -17,7 +17,7 @@ public class Shop : MonoBehaviour
 
     public BoxCollider AryaCollider;
 
-    private bool _shopActivated;
+
     private float _coins;
     private string _EquippedRodKey = "EquippedRod"; // name of the rod equiped
 
@@ -43,7 +43,6 @@ public class Shop : MonoBehaviour
     {
         isShopping = true;
         Time.timeScale = 0; // pauses game background
-        _shopActivated = true;
         shopObject.SetActive(true); // turns the shop on
         shopCanvas.SetActive(true);
         sellCanvas.SetActive(false);
@@ -54,7 +53,6 @@ public class Shop : MonoBehaviour
     {
         isShopping = false;
         Time.timeScale = 1; // resumes game
-        _shopActivated = false;
         shopObject.SetActive(false); // turns shop off
         shopCanvas.SetActive(false);
         sellCanvas.SetActive(false);
@@ -116,14 +114,14 @@ public class Shop : MonoBehaviour
 
     public void Sell(string name)
     {
-        for (int i = inventoryScript.fishInventory.Count - 1; i >= 0; i--)
+        for (int i = inventoryScript.FishInventory.Count - 1; i >= 0; i--)
         {
-            if (inventoryScript.fishInventory[i].Name == name) // goes through the fish inventory and every time it spots a fish with the same name as the one you want to sell it sells it
+            if (inventoryScript.FishInventory[i].Name == name) // goes through the fish inventory and every time it spots a fish with the same name as the one you want to sell it sells it
             {
-                _coins += inventoryScript.fishInventory[i].Value;
+                _coins += inventoryScript.FishInventory[i].Value;
                 Coins.text = $"{_coins}"; // update coins for both sell and buy screen
                 CoinsShop.text = $"{_coins}";
-                inventoryScript.fishInventory.RemoveAt(i);
+                inventoryScript.FishInventory.RemoveAt(i);
             }
         }
         inventoryScript.SortByName(); // sort the inventory
