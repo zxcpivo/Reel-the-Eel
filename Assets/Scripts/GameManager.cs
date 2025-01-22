@@ -61,17 +61,17 @@ public class GameManager : MonoBehaviour
     {
         Exclamation.SetActive(true);
         int Luck = Random.Range(1, 1001);
-        if(Luck <= 500)
+        if (Luck <= 500)
         {
             currentFish = "cod";
             fishingGame.SetActive(true);
         }
-        else if(501 <= Luck && Luck <= 750)
+        else if (501 <= Luck && Luck <= 750)
         {
             currentFish = "salmon";
             fishingGame.SetActive(true);
         }
-        else if(751 <= Luck && Luck <= 900)
+        else if (751 <= Luck && Luck <= 900)
         {
             currentFish = "toona";
             fishingGame.SetActive(true);
@@ -156,6 +156,4 @@ public class GameManager : MonoBehaviour
         }
         inventoryManager.AddFishToInventory(newFish, fishSprite);
     }
-
-
 }
