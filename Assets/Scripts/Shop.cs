@@ -17,7 +17,7 @@ public class Shop : MonoBehaviour
 
     public BoxCollider AryaCollider;
 
-    private bool _shopActivated;
+
     private float _coins;
     private string _EquippedRodKey = "EquippedRod"; // name of the rod equiped
 
@@ -43,7 +43,6 @@ public class Shop : MonoBehaviour
     {
         isShopping = true;
         Time.timeScale = 0; // pauses game background
-        _shopActivated = true;
         shopObject.SetActive(true); // turns the shop on
         shopCanvas.SetActive(true);
         sellCanvas.SetActive(false);
@@ -54,7 +53,6 @@ public class Shop : MonoBehaviour
     {
         isShopping = false;
         Time.timeScale = 1; // resumes game
-        _shopActivated = false;
         shopObject.SetActive(false); // turns shop off
         shopCanvas.SetActive(false);
         sellCanvas.SetActive(false);
