@@ -296,7 +296,26 @@ public class InventoryManager : MonoBehaviour
             UpdateInventoryDisplay(filteredFishInventory); // update the ui to display the inventory
         }
     }
+    public void SearchByWeight(string searchText)
+    {
+        filteredFishInventory.Clear(); // clears the other list
+        for (int i = 0; i < fishInventory.Count; i++)
+        {
+            if (fishInventory[i].Weight >= int.Convert.ToInt32(searchText)) // Converts the fish's name and the text inputed in serach bar to lowercase for case-insensitive comparison. Contain() checks if any letters are similar
+            {
+                filteredFishInventory.Add(fishInventory[i]); // add to the new filtered list
+            }
+        }
 
+        if (string.IsNullOrWhiteSpace(searchText)) // if they enter nothing
+        {
+            SortByName(); // display the full inventory
+        }
+        else
+        {
+            UpdateInventoryDisplay(filteredFishInventory); // update the ui to display the inventory
+        }
+    }
     private void UpdateInventoryDisplay(List<Fish> fishList) // simply updates the display of the fish
     {
         InitializeInventory(); // initialize list
