@@ -10,14 +10,16 @@ public class Fish
     public int Quantity;
     public int Clicks;
     public float Value;
+    public string Color;
 
-    public Fish(string name, int weight, int quantity, int clicks, float value)
+    public Fish(string name, int weight, int quantity, int clicks, float value, string color)
     {
         this.Name = name;
         this.Weight = weight;
         this.Quantity = quantity;
         this.Clicks = clicks;
         this.Value = value;
+        this.Color = color;
     }
 }
 

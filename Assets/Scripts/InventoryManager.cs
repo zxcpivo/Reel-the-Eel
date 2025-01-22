@@ -246,7 +246,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-    public void SortByWeightAndValue()
+    public void SortByWeightAndValue() //gleb
     {
         InitializeInventory(); 
 
@@ -273,6 +273,27 @@ public class InventoryManager : MonoBehaviour
             {
                 AddItem(fish.Name, fish.Weight, fish.Quantity, sprite, "Caught Fish");
             }
+        }
+    }
+    public void SearchByColor(string searchColor) //gleb
+    {
+        filteredFishInventory.Clear();
+
+        foreach (Fish fish in fishInventory)
+        {
+            if (fish.Color.ToLower() == searchColor.ToLower()) 
+            {
+                filteredFishInventory.Add(fish); 
+            }
+        }
+
+        if (string.IsNullOrWhiteSpace(searchColor))
+        {
+            SortByName(); 
+        }
+        else
+        {
+            UpdateInventoryDisplay(filteredFishInventory); 
         }
     }
 

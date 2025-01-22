@@ -115,37 +115,43 @@ public class GameManager : MonoBehaviour
         if (name == "cod")
         {
             int weight = Random.Range(1, 10);
-            newFish = new Fish($"Cod", weight, 1, 10, weight * 1f);
+            string color = "Brown";
+            newFish = new Fish($"Cod", weight, 1, 10, weight * 1f, color);
             fishSprite = codSprite;
         }
         else if (name == "salmon")
         {
             int weight = Random.Range(10, 20);
-            newFish = new Fish($"Salmon", weight, 1, 20, weight * 1.5f);
+            string color = "Yellow";
+            newFish = new Fish($"Salmon", weight, 1, 20, weight * 1.5f, color);
             fishSprite = salmonSprite;
         }
         else if (name == "toona")
         {
             int weight = Random.Range(10, 20);
-            newFish = new Fish($"Toona", weight, 1, 20, weight * 2f);
+            string color = "Blue";
+            newFish = new Fish($"Toona", weight, 1, 20, weight * 2f, color);
             fishSprite = toonaSprite;
         }
         else if (name == "koi")
         {
             int weight = Random.Range(20, 50);
-            newFish = new Fish($"Koi", weight, 1, 20, weight * 1.5f);
+            string color = "Red";
+            newFish = new Fish($"Koi", weight, 1, 20, weight * 1.5f, color);
             fishSprite = koiSprite;
         }
         else if (name == "angler")
         {
             int weight = Random.Range(50, 100);
-            newFish = new Fish($"Angler", weight, 1, 20, weight * 1.5f);
+            string color = "Blue";
+            newFish = new Fish($"Angler", weight, 1, 20, weight * 1.5f, color);
             fishSprite = anglerSprite;
         }
         else if (name == "eel")
         {
             int weight = Random.Range(100, 200);
-            newFish = new Fish($"Eel", weight, 1, 20, weight * 2f);
+            string color = "Brown";
+            newFish = new Fish($"Eel", weight, 1, 20, weight * 2f, color);
             fishSprite = eelSprite;
         }
         inventoryManager.AddFishToInventory(newFish, fishSprite);
