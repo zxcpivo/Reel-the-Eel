@@ -45,13 +45,13 @@ public class DevCommandsManager : MonoBehaviour
 
     private void SpawnSpecificFish(string fishName)
     {
-        Debug.Log($"Spawning specific fish: {fishName}");
+        Debug.Log($"spawning {fishName}");
         gameManager.CatchFish(fishName);
     }
 
     private void SpawnRandomFish()
     {
-        Debug.Log("Spawning random fish...");
+        Debug.Log("spawning random fish");
         int Luck = Random.Range(1, 1001);
         string randomFish;
 
