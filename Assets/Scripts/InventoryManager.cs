@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 [System.Serializable]
 public class FishInventoryData
@@ -39,7 +40,7 @@ public class InventoryManager : MonoBehaviour
     {
 
         _controller = FindObjectOfType<CharacterController2D>();
-        _filePath = Path.Combine(Application.persistentDataPath, "fishInventory.json");
+        _filePath = Path.Combine(Application.persistentDataPath, "FishInventory.json");
         LoadInventory();
 
         Inventory.SetActive(true);
@@ -319,24 +320,39 @@ public class InventoryManager : MonoBehaviour
     }
     public void SearchByWeight(string searchText)
     {
-        filteredFishInventory.Clear(); // clears the other list
-        for (int i = 0; i < fishInventory.Count; i++)
+        _filteredFishInventory.Clear(); // Clear the filtered list
+
+        // Handle empty or whitespace input (e.g., backspace)
+        if (string.IsNullOrWhiteSpace(searchText))
         {
-            if (fishInventory[i].Weight >= int.Convert.ToInt32(searchText)) // Converts the fish's name and the text inputed in serach bar to lowercase for case-insensitive comparison. Contain() checks if any letters are similar
-            {
-                filteredFishInventory.Add(fishInventory[i]); // add to the new filtered list
-            }
+            SortByName(); // Show the full inventory
+            return;
         }
 
-        if (string.IsNullOrWhiteSpace(searchText)) // if they enter nothing
+        try
         {
-            SortByName(); // display the full inventory
+            // Convert input to integer
+            int weight = Convert.ToInt32(searchText);
+
+            // Apply the filtering algorithm
+            foreach (var fish in FishInventory)
+            {
+                if (fish.Weight >= weight) // Compare fish weight
+                {
+                    _filteredFishInventory.Add(fish); // Add matching fish to filtered list
+                }
+            }
         }
-        else
+        catch (FormatException)
         {
-            UpdateInventoryDisplay(filteredFishInventory); // update the ui to display the inventory
+
+            return;
         }
+
+        // Update display with the filtered results
+        UpdateInventoryDisplay(_filteredFishInventory);
     }
+
     private void UpdateInventoryDisplay(List<Fish> fishList) // simply updates the display of the fish
     {
         InitializeInventory(); // initialize list
@@ -387,6 +403,8 @@ public class InventoryManager : MonoBehaviour
             string json = File.ReadAllText(_filePath);
             FishInventoryData data = JsonUtility.FromJson<FishInventoryData>(json);
             this.FishInventory = data.fishInventory;
+            UpdateInventoryDisplay(FishInventory);
+            Debug.Log($"Loaded {FishInventory.Count} fish from the inventory.");
         }
     }
 }
