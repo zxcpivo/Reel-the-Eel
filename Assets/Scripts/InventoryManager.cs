@@ -353,6 +353,38 @@ public class InventoryManager : MonoBehaviour
         UpdateInventoryDisplay(_filteredFishInventory);
     }
 
+    public void SearchByValue(string searchText)
+    {
+        _filteredFishInventory.Clear(); 
+
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            SortByName(); 
+            return;
+        }
+
+        try
+        {
+            int value = Convert.ToInt32(searchText);
+
+            foreach (var fish in FishInventory)
+            {
+                if (fish.Value >= value) 
+                {
+                    _filteredFishInventory.Add(fish); 
+                }
+            }
+        }
+        catch (FormatException)
+        {
+            Debug.LogWarning("Invalid value input. Please enter a numeric value.");
+            return;
+        }
+
+        UpdateInventoryDisplay(_filteredFishInventory);
+    }
+
+
     private void UpdateInventoryDisplay(List<Fish> fishList) // simply updates the display of the fish
     {
         InitializeInventory(); // initialize list
